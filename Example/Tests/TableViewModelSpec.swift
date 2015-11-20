@@ -1,9 +1,9 @@
 import Foundation
-
-import TableViewModel
-
+import UIKit
 import Quick
 import Nimble
+
+import TableViewModel
 
 class TableViewSpec: QuickSpec {
     override func spec() {
@@ -35,7 +35,19 @@ class TableViewSpec: QuickSpec {
                     expect(tableView.numberOfSections) == 0
                 }
 
+                context("when a section is added to the model") {
 
+                    var tableSection: TableSection!
+
+                    beforeEach {
+                        tableSection = TableSection()
+                        tableViewModel.addSection(tableSection)
+                    }
+
+                    it("has 1 section") {
+                        expect(tableView.numberOfSections) == 1
+                    }
+                }
             }
 
         }
