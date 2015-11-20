@@ -1,24 +1,18 @@
-//
-//  ViewController.swift
-//  TableViewModel
-//
-//  Created by tbergmen on 11/18/2015.
-//  Copyright (c) 2015 tbergmen. All rights reserved.
-//
-
 import UIKit
+import TableViewModel
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var tableView: UITableView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
 }
 

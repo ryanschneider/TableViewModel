@@ -8,5 +8,6 @@ end
 target 'TableViewModel_Tests', :exclusive => true do
   pod "TableViewModel", :path => "../"
 
-  
+  pod 'Quick', '~> 0.8.0'
+  pod 'Nimble', '3.0.0'
 end
