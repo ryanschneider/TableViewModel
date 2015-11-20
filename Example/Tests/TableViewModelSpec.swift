@@ -40,6 +40,22 @@ class TableViewSpec: QuickSpec {
 
                 context("when a section is added to the model") {
 
+                    func firstRowIndexPath() -> NSIndexPath {
+                        return NSIndexPath(forRow: 0, inSection: 0)
+                    }
+
+                    func secondRowIndexPath() -> NSIndexPath {
+                        return NSIndexPath(forRow: 1, inSection: 0)
+                    }
+
+                    func firstCell() -> UITableViewCell? {
+                        return tableView.cellForRowAtIndexPath(firstRowIndexPath())
+                    }
+
+                    func secondCell() -> UITableViewCell? {
+                        return tableView.cellForRowAtIndexPath(secondRowIndexPath())
+                    }
+
                     var section: TableSection!
 
                     beforeEach {
@@ -88,7 +104,7 @@ class TableViewSpec: QuickSpec {
                         }
 
                         it("has the correct cell") {
-                            let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))
+                            let cell = firstCell()
                             expect(cell).to(beASampleCell1())
                         }
 
@@ -105,8 +121,8 @@ class TableViewSpec: QuickSpec {
                             }
 
                             it("has the correct cells") {
-                                let cell1 = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))
-                                let cell2 = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0))
+                                let cell1 = firstCell()
+                                let cell2 = secondCell()
                                 expect(cell1).to(beASampleCell1())
                                 expect(cell2).to(beASampleCell1())
                                 expect(cell1) !== cell2
@@ -116,8 +132,8 @@ class TableViewSpec: QuickSpec {
                                 var cell1, cell2: UITableViewCell!
 
                                 beforeEach {
-                                    cell1 = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))
-                                    cell2 = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0))
+                                    cell1 = firstCell()
+                                    cell2 = secondCell()
 
                                     section.removeRow(row1)
                                 }
@@ -143,7 +159,7 @@ class TableViewSpec: QuickSpec {
                             }
 
                             it("configures the cell") {
-                                let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))
+                                let cell = firstCell()
                                 let label = cell?.contentView.subviews[0] as! UILabel
                                 expect(label.text) == "Configured the cell"
                             }
@@ -161,7 +177,7 @@ class TableViewSpec: QuickSpec {
                             }
 
                             it("configures the cell") {
-                                let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0))
+                                let cell = secondCell()
                                 let label = cell?.contentView.subviews[0] as! UILabel
                                 expect(label.text) == "Configured"
                             }
@@ -178,8 +194,8 @@ class TableViewSpec: QuickSpec {
 
                             context("when the cell is selected") {
                                 beforeEach {
-                                    tableView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), animated: false, scrollPosition: UITableViewScrollPosition.Top)
-                                    model.tableView(tableView, didSelectRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0))
+                                    tableView.selectRowAtIndexPath(firstRowIndexPath(), animated: false, scrollPosition: UITableViewScrollPosition.Top)
+                                    model.tableView(tableView, didSelectRowAtIndexPath: firstRowIndexPath())
                                 }
 
                                 it("calls the selection handler when the cell is selected") {
@@ -200,8 +216,8 @@ class TableViewSpec: QuickSpec {
 
                             context("when the cell is selected") {
                                 beforeEach {
-                                    tableView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), animated: false, scrollPosition: UITableViewScrollPosition.Top)
-                                    model.tableView(tableView, didSelectRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0))
+                                    tableView.selectRowAtIndexPath(firstRowIndexPath(), animated: false, scrollPosition: UITableViewScrollPosition.Top)
+                                    model.tableView(tableView, didSelectRowAtIndexPath: firstRowIndexPath())
                                 }
 
                                 it("does not deselect the cell") {
@@ -220,7 +236,7 @@ class TableViewSpec: QuickSpec {
                         }
 
                         it("configures correct height for the cell") {
-                            let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))
+                            let cell = firstCell()
                             expect(cell?.frame.height) == 80
                         }
                     }
