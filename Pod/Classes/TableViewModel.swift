@@ -78,6 +78,16 @@ public class TableViewModel: NSObject, UITableViewDataSource, UITableViewDelegat
         return rowForIndexPath(indexPath).cellHeight()
     }
 
+    public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let row = rowForIndexPath(indexPath)
+
+        row.selected()
+
+        if row.shouldDeselectAfterSelection {
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        }
+    }
+
     private func observableSections() -> NSMutableArray {
         return mutableArrayValueForKey("sections")
     }

@@ -166,6 +166,51 @@ class TableViewSpec: QuickSpec {
                                 expect(label.text) == "Configured"
                             }
                         }
+
+                        context("when a selection handler is configured for the row") {
+                            var selectionHandlerIsCalled: Bool!
+                            beforeEach {
+                                selectionHandlerIsCalled = false
+                                row1.didSelectCell {
+                                    selectionHandlerIsCalled = true
+                                }
+                            }
+
+                            context("when the cell is selected") {
+                                beforeEach {
+                                    tableView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), animated: false, scrollPosition: UITableViewScrollPosition.Top)
+                                    model.tableView(tableView, didSelectRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0))
+                                }
+
+                                it("calls the selection handler when the cell is selected") {
+                                    expect(selectionHandlerIsCalled) == true
+                                }
+
+                                it("deselects the cell by default") {
+                                    var selectedRowIndexPath = tableView.indexPathForSelectedRow
+                                    expect(selectedRowIndexPath).to(beNil())
+                                }
+                            }
+                        }
+
+                        context("when the row is configured for not to deselect after selection") {
+                            beforeEach {
+                                row1.shouldDeselectAfterSelection = false
+                            }
+
+                            context("when the cell is selected") {
+                                beforeEach {
+                                    tableView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), animated: false, scrollPosition: UITableViewScrollPosition.Top)
+                                    model.tableView(tableView, didSelectRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0))
+                                }
+
+                                it("does not deselect the cell") {
+                                    var selectedRowIndexPath = tableView.indexPathForSelectedRow
+                                    expect(selectedRowIndexPath!.row) == 0
+                                    expect(selectedRowIndexPath!.section) == 0
+                                }
+                            }
+                        }
                     }
 
                     context("when a row with custom height cell added to the section") {
@@ -178,6 +223,10 @@ class TableViewSpec: QuickSpec {
                             let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))
                             expect(cell?.frame.height) == 80
                         }
+                    }
+
+                    context("when a cell with custom class is used") {
+
                     }
                 }
             }
