@@ -16,6 +16,7 @@ public class TableViewModel: NSObject, UITableViewDataSource {
         super.init()
 
         self.tableView.dataSource = self;
+        self.tableView.reloadData()
 
         addObserver(self, forKeyPath: "sections", options: NSKeyValueObservingOptions.New, context: nil)
     }
@@ -53,19 +54,36 @@ public class TableViewModel: NSObject, UITableViewDataSource {
         observableSections().removeObject(section)
     }
 
+    public func indexOfSection(section: TableSection) -> Int {
+        return sections.indexOfObject(section)
+    }
+
     public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return sections.count
     }
 
     public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return sectionAtIndex(section).numberOfRows()
     }
 
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let row = rowForIndexPath(indexPath)
+        let cell = row.cellForTableView(tableView) as UITableViewCell!
+
+        return cell
     }
 
     private func observableSections() -> NSMutableArray {
         return mutableArrayValueForKey("sections")
+    }
+
+    private func sectionAtIndex(index: Int) -> TableSection {
+        return sections[index] as! TableSection
+    }
+
+    private func rowForIndexPath(indexPath: NSIndexPath) -> TableRow {
+        let section = sections[indexPath.section] as! TableSection
+        let row = section.rowAtIndex(indexPath.row)
+        return row
     }
 }
