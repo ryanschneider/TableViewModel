@@ -47,6 +47,16 @@ class TableViewSpec: QuickSpec {
                     it("has 1 section") {
                         expect(tableView.numberOfSections) == 1
                     }
+
+                    context("when the section is removed from model") {
+                        beforeEach {
+                            tableViewModel.removeSection(tableSection)
+                        }
+
+                        it("has 0 sections") {
+                            expect(tableView.numberOfSections) == 0
+                        }
+                    }
                 }
             }
 

@@ -25,17 +25,32 @@ public class TableViewModel: NSObject, UITableViewDataSource {
     }
 
     override public func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String:AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        guard let indexSet: NSIndexSet = change?[NSKeyValueChangeIndexesKey] as? NSIndexSet else {
+        guard let indexSet: NSIndexSet = change?[NSKeyValueChangeIndexesKey] as! NSIndexSet else {
+            return
+        }
+
+        guard let kind: NSKeyValueChange = NSKeyValueChange(rawValue: change?[NSKeyValueChangeKindKey] as! UInt) else {
             return
         }
 
         self.tableView.beginUpdates()
-        tableView.insertSections(indexSet, withRowAnimation: self.sectionAnimation)
+        switch kind {
+        case .Insertion:
+            tableView.insertSections(indexSet, withRowAnimation: self.sectionAnimation)
+        case .Removal:
+            tableView.deleteSections(indexSet, withRowAnimation: self.sectionAnimation)
+        default:
+            return
+        }
         tableView.endUpdates()
     }
 
     public func addSection(section: TableSection) {
         observableSections().addObject(section)
+    }
+
+    public func removeSection(section: TableSection) {
+        observableSections().removeObject(section)
     }
 
     public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
