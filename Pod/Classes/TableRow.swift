@@ -5,6 +5,8 @@ public class TableRow {
     private let nibName: String
     private var bundle: NSBundle?
     private var cell: UITableViewCell?
+    private var configureClosure: ((cell:UITableViewCell) -> ())?
+    private var heightOfCellFromNib: CGFloat?
 
     public init(nibName: String, inBundle bundle: NSBundle? = nil) {
         self.nibName = nibName
@@ -16,7 +18,31 @@ public class TableRow {
             cell = loadCellForTableView(tableView)
         }
 
+        if let unwrappedCell = cell {
+            heightOfCellFromNib = unwrappedCell.frame.height
+
+            if let configure = configureClosure {
+                configure(cell: unwrappedCell)
+            }
+        }
+
         return cell
+    }
+
+    public func cellHeight() -> CGFloat {
+        if let height = self.heightOfCellFromNib {
+            return height
+        }
+
+        return 44
+    }
+
+    public func configureCell(closure: (cell:UITableViewCell) -> ()) {
+        configureClosure = closure
+        guard let cell = self.cell else {
+            return
+        }
+        closure(cell: cell)
     }
 
     private func loadCellForTableView(tableView: UITableView) -> UITableViewCell? {

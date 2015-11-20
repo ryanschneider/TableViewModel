@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-public class TableViewModel: NSObject, UITableViewDataSource {
+public class TableViewModel: NSObject, UITableViewDataSource, UITableViewDelegate {
 
     public let tableView: UITableView
     public var sectionAnimation: UITableViewRowAnimation
@@ -15,7 +15,8 @@ public class TableViewModel: NSObject, UITableViewDataSource {
 
         super.init()
 
-        self.tableView.dataSource = self;
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
         self.tableView.reloadData()
 
         addObserver(self, forKeyPath: "sections", options: NSKeyValueObservingOptions.New, context: nil)
@@ -71,6 +72,10 @@ public class TableViewModel: NSObject, UITableViewDataSource {
         let cell = row.cellForTableView(tableView) as UITableViewCell!
 
         return cell
+    }
+
+    public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return rowForIndexPath(indexPath).cellHeight()
     }
 
     private func observableSections() -> NSMutableArray {

@@ -14,8 +14,11 @@ class TableViewSpec: QuickSpec {
                 var view: UIView!
                 var viewController: UIViewController!
                 var model: TableViewModel!
+                var bundle: NSBundle!
 
                 beforeEach {
+                    bundle = NSBundle(forClass: self.dynamicType)
+
                     view = UIView()
                     view.frame = UIScreen.mainScreen().bounds
 
@@ -76,7 +79,7 @@ class TableViewSpec: QuickSpec {
                         var row1: TableRow!
 
                         beforeEach {
-                            row1 = TableRow(nibName: "SampleCell1", inBundle: NSBundle(forClass: self.dynamicType))
+                            row1 = TableRow(nibName: "SampleCell1", inBundle: bundle)
                             section.addRow(row1)
                         }
 
@@ -93,7 +96,7 @@ class TableViewSpec: QuickSpec {
                             var row2: TableRow!
 
                             beforeEach {
-                                row2 = TableRow(nibName: "SampleCell1", inBundle: NSBundle(forClass: self.dynamicType))
+                                row2 = TableRow(nibName: "SampleCell1", inBundle: bundle)
                                 section.addRow(row2)
                             }
 
@@ -128,6 +131,52 @@ class TableViewSpec: QuickSpec {
                                     expect(actualCell) === cell2
                                 }
                             }
+                        }
+
+                        context("when a configuration closure is added to the row after adding the row to the section") {
+                            beforeEach {
+                                row1.configureCell {
+                                    cell in
+                                    let label = cell.contentView.subviews[0] as! UILabel
+                                    label.text = "Configured the cell"
+                                }
+                            }
+
+                            it("configures the cell") {
+                                let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))
+                                let label = cell?.contentView.subviews[0] as! UILabel
+                                expect(label.text) == "Configured the cell"
+                            }
+                        }
+
+                        context("when a configuration closure is added to the row before adding the row to a section") {
+                            beforeEach {
+                                let row2 = TableRow(nibName: "SampleCell1", inBundle: bundle)
+                                row2.configureCell {
+                                    cell in
+                                    let label = cell.contentView.subviews[0] as! UILabel
+                                    label.text = "Configured"
+                                }
+                                section.addRow(row2)
+                            }
+
+                            it("configures the cell") {
+                                let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0))
+                                let label = cell?.contentView.subviews[0] as! UILabel
+                                expect(label.text) == "Configured"
+                            }
+                        }
+                    }
+
+                    context("when a row with custom height cell added to the section") {
+                        beforeEach {
+                            let row = TableRow(nibName: "SampleCell2", inBundle: bundle)
+                            section.addRow(row)
+                        }
+
+                        it("configures correct height for the cell") {
+                            let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))
+                            expect(cell?.frame.height) == 80
                         }
                     }
                 }
