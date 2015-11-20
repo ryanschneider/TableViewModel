@@ -12,6 +12,7 @@
 		3E08DC411BFDD77D003B1840 /* ViewControllerTestingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E30D43B1BFCB139000B8E77 /* ViewControllerTestingHelper.swift */; };
 		3E30D4481BFCB31B000B8E77 /* TableViewModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E30D4471BFCB31B000B8E77 /* TableViewModel.framework */; };
 		3EFE02F11BFF77EB00AF4BF5 /* SampleCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EFE02F01BFF77EB00AF4BF5 /* SampleCell1.xib */; };
+		3EFE02F31BFF8CE400AF4BF5 /* TestCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EFE02F21BFF8CE400AF4BF5 /* TestCell1.xib */; };
 		3EFFC5571BFCAAC900B28DDD /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EFFC5551BFCAAC900B28DDD /* Nimble.framework */; };
 		3EFFC5581BFCAAC900B28DDD /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EFFC5561BFCAAC900B28DDD /* Quick.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
@@ -41,6 +42,7 @@
 		3E30D43B1BFCB139000B8E77 /* ViewControllerTestingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerTestingHelper.swift; sourceTree = "<group>"; };
 		3E30D4471BFCB31B000B8E77 /* TableViewModel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TableViewModel.framework; path = "Pods/../build/Debug-iphoneos/TableViewModel.framework"; sourceTree = "<group>"; };
 		3EFE02F01BFF77EB00AF4BF5 /* SampleCell1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SampleCell1.xib; sourceTree = "<group>"; };
+		3EFE02F21BFF8CE400AF4BF5 /* TestCell1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestCell1.xib; sourceTree = "<group>"; };
 		3EFFC5501BFCAA2400B28DDD /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = "Pods/../build/Debug-iphoneos/Nimble.framework"; sourceTree = "<group>"; };
 		3EFFC5511BFCAA2400B28DDD /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = "Pods/../build/Debug-iphoneos/Quick.framework"; sourceTree = "<group>"; };
 		3EFFC5551BFCAAC900B28DDD /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = "Pods/../build/Debug-iphoneos/Nimble.framework"; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
+				3EFE02F21BFF8CE400AF4BF5 /* TestCell1.xib */,
 			);
 			name = "Example for TableViewModel";
 			path = TableViewModel;
@@ -274,6 +277,7 @@
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
+				3EFE02F31BFF8CE400AF4BF5 /* TestCell1.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
