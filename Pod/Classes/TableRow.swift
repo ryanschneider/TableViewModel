@@ -7,8 +7,8 @@ public class TableRow {
     private var cell: UITableViewCell?
     private var configureClosure: ((cell:UITableViewCell) -> ())?
     private var didSelectCellClosure: (() -> ())?
-    private var heightOfCellFromNib: CGFloat?
 
+    public var height: CGFloat?
     public var shouldDeselectAfterSelection: Bool
 
     public init(nibName: String, inBundle bundle: NSBundle? = nil) {
@@ -24,7 +24,10 @@ public class TableRow {
         }
 
         if let unwrappedCell = cell {
-            heightOfCellFromNib = unwrappedCell.frame.height
+            if let height = self.height {
+            } else {
+                self.height = unwrappedCell.frame.height
+            }
 
             if let configure = configureClosure {
                 configure(cell: unwrappedCell)
@@ -35,7 +38,7 @@ public class TableRow {
     }
 
     internal func cellHeight() -> CGFloat {
-        if let height = self.heightOfCellFromNib {
+        if let height = self.height {
             return height
         }
 

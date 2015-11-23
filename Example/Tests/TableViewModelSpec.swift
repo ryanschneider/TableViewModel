@@ -210,14 +210,22 @@ class TableViewSpec: QuickSpec {
                         }
 
                         context("when the row is configured for not to deselect after selection") {
+
+                            func selectRowAtIndexPath(indexPath: NSIndexPath) {
+                                tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
+
+                                // We need to notify the model manually here because tableView doesn't
+                                // call the delegate method after selectRowAtIndexPath
+                                model.tableView(tableView, didSelectRowAtIndexPath: firstRowIndexPath())
+                            }
+
                             beforeEach {
                                 row1.shouldDeselectAfterSelection = false
                             }
 
                             context("when the cell is selected") {
                                 beforeEach {
-                                    tableView.selectRowAtIndexPath(firstRowIndexPath(), animated: false, scrollPosition: UITableViewScrollPosition.Top)
-                                    model.tableView(tableView, didSelectRowAtIndexPath: firstRowIndexPath())
+                                    selectRowAtIndexPath(firstRowIndexPath())
                                 }
 
                                 it("does not deselect the cell") {
@@ -238,6 +246,19 @@ class TableViewSpec: QuickSpec {
                         it("configures correct height for the cell") {
                             let cell = firstCell()
                             expect(cell?.frame.height) == 80
+                        }
+                    }
+
+                    context("when height of cell is given externally") {
+                        beforeEach {
+                            let row = TableRow(nibName: "SampleCell2", inBundle: bundle)
+                            row.height = 120
+                            section.addRow(row)
+                        }
+
+                        it("ignores the cell height in the nib") {
+                            let cell = firstCell()
+                            expect(cell?.frame.height) == 120
                         }
                     }
 
