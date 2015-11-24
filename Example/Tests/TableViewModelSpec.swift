@@ -5,11 +5,11 @@ import Nimble
 
 import TableViewModel
 
-class TableViewSpec: QuickSpec {
+class TableViewModelSpec: QuickSpec {
     override func spec() {
-        describe("table view bound to a 'TableViewModel'") {
+        describe("table view model") {
 
-            context("when it is initialized with a 'TableViewModel'") {
+            context("when a table view is initialized with a 'TableViewModel'") {
                 var tableView: UITableView!
                 var view: UIView!
                 var viewController: UIViewController!
@@ -262,8 +262,28 @@ class TableViewSpec: QuickSpec {
                         }
                     }
 
-                    context("when a cell with custom class is used") {
+                    context("when a cell with variable height is used") {
+                        var rows: Array<TableRow>!
 
+                        beforeEach {
+                            rows = Array<TableRow>()
+
+                            for var i = 1; i < 20; i++ {
+                                let row = TableRow(nibName: "SampleCell1", inBundle: bundle)
+                                row.height = Float(100 + i)
+                                rows.append(row)
+                                section.addRow(row)
+                            }
+                        }
+
+                        it("renders each row in correct height") {
+                            for var i = 1; i < 20; i++ {
+                                let indexPath = NSIndexPath(forRow: (i - 1), inSection: 0)
+                                tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Top, animated: false)
+                                var cell = tableView.cellForRowAtIndexPath(indexPath)
+                                expect(cell?.frame.height) == CGFloat(100 + i)
+                            }
+                        }
                     }
                 }
             }

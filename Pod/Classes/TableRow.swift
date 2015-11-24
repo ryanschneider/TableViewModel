@@ -4,11 +4,10 @@ import UIKit
 public class TableRow {
     private let nibName: String
     private var bundle: NSBundle?
-    private var cell: UITableViewCell?
+    internal var cell: UITableViewCell?
     private var configureClosure: ((cell:UITableViewCell) -> ())?
     private var didSelectCellClosure: (() -> ())?
-
-    public var height: CGFloat?
+    public var height: Float?
     public var shouldDeselectAfterSelection: Bool
 
     public init(nibName: String, inBundle bundle: NSBundle? = nil) {
@@ -19,19 +18,18 @@ public class TableRow {
     }
 
     public func cellForTableView(tableView: UITableView) -> UITableViewCell? {
-        if cell == nil {
-            cell = loadCellForTableView(tableView)
+        if self.cell == nil {
+            self.cell = loadCellForTableView(tableView)
         }
 
-        if let unwrappedCell = cell {
-            if let height = self.height {
-            } else {
-                self.height = unwrappedCell.frame.height
-            }
+        callConfigureCellClosure()
 
-            if let configure = configureClosure {
-                configure(cell: unwrappedCell)
-            }
+        guard let cell = self.cell else {
+            return nil
+        }
+
+        if self.height == nil {
+            self.height = Float(cell.frame.height)
         }
 
         return cell
@@ -39,7 +37,7 @@ public class TableRow {
 
     internal func cellHeight() -> CGFloat {
         if let height = self.height {
-            return height
+            return CGFloat(height)
         }
 
         return 44
@@ -53,14 +51,23 @@ public class TableRow {
 
     public func configureCell(closure: (cell:UITableViewCell) -> ()) {
         configureClosure = closure
-        guard let cell = self.cell else {
-            return
-        }
-        closure(cell: cell)
+        callConfigureCellClosure()
     }
 
     public func didSelectCell(closure: () -> ()) {
         didSelectCellClosure = closure
+    }
+
+    internal func callConfigureCellClosure() {
+        guard let closure = self.configureClosure else {
+            return
+        }
+
+        guard let cell = self.cell else {
+            return
+        }
+
+        closure(cell: cell)
     }
 
     private func loadCellForTableView(tableView: UITableView) -> UITableViewCell? {

@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		264F32E522D6E32A8E39B5FA /* SampleCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264F3255B1BDE9CEDF384C0B /* SampleCell2.swift */; };
 		264F375757D48441C774290A /* TableViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264F39211E2A8BCD7D1464EF /* TableViewModelSpec.swift */; };
 		264F3E30B0BB88A2B7135425 /* TableRowSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264F360A4DB2F6FFD3EA1E6B /* TableRowSpec.swift */; };
 		3E08DC411BFDD77D003B1840 /* ViewControllerTestingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E30D43B1BFCB139000B8E77 /* ViewControllerTestingHelper.swift */; };
 		3E30D4481BFCB31B000B8E77 /* TableViewModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E30D4471BFCB31B000B8E77 /* TableViewModel.framework */; };
+		3EF9B84C1C048F2100B54ECE /* TestCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EF9B84B1C048F2100B54ECE /* TestCell2.xib */; };
+		3EF9B84D1C04908200B54ECE /* TestCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264F30DDE593F2B81D740DAA /* TestCell2.swift */; };
 		3EFE02F11BFF77EB00AF4BF5 /* SampleCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EFE02F01BFF77EB00AF4BF5 /* SampleCell1.xib */; };
 		3EFE02F31BFF8CE400AF4BF5 /* TestCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EFE02F21BFF8CE400AF4BF5 /* TestCell1.xib */; };
 		3EFE02F61BFF91BB00AF4BF5 /* SampleCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EFE02F41BFF90DF00AF4BF5 /* SampleCell2.xib */; };
@@ -36,12 +39,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		264F30DDE593F2B81D740DAA /* TestCell2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCell2.swift; sourceTree = "<group>"; };
+		264F3255B1BDE9CEDF384C0B /* SampleCell2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleCell2.swift; sourceTree = "<group>"; };
 		264F360A4DB2F6FFD3EA1E6B /* TableRowSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableRowSpec.swift; sourceTree = "<group>"; };
 		264F39211E2A8BCD7D1464EF /* TableViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewModelSpec.swift; sourceTree = "<group>"; };
 		34394C82CF27AF27BF0957C5 /* Pods-TableViewModel_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TableViewModel_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TableViewModel_Tests/Pods-TableViewModel_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		3922A25F79961226AC900013 /* TableViewModel.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = TableViewModel.podspec; path = ../TableViewModel.podspec; sourceTree = "<group>"; };
 		3E30D43B1BFCB139000B8E77 /* ViewControllerTestingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerTestingHelper.swift; sourceTree = "<group>"; };
 		3E30D4471BFCB31B000B8E77 /* TableViewModel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TableViewModel.framework; path = "Pods/../build/Debug-iphoneos/TableViewModel.framework"; sourceTree = "<group>"; };
+		3EF9B84B1C048F2100B54ECE /* TestCell2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestCell2.xib; sourceTree = "<group>"; };
 		3EFE02F01BFF77EB00AF4BF5 /* SampleCell1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SampleCell1.xib; sourceTree = "<group>"; };
 		3EFE02F21BFF8CE400AF4BF5 /* TestCell1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestCell1.xib; sourceTree = "<group>"; };
 		3EFE02F41BFF90DF00AF4BF5 /* SampleCell2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SampleCell2.xib; sourceTree = "<group>"; };
@@ -132,6 +138,8 @@
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 				3EFE02F21BFF8CE400AF4BF5 /* TestCell1.xib */,
+				3EF9B84B1C048F2100B54ECE /* TestCell2.xib */,
+				264F30DDE593F2B81D740DAA /* TestCell2.swift */,
 			);
 			name = "Example for TableViewModel";
 			path = TableViewModel;
@@ -154,6 +162,7 @@
 				3EFE02F01BFF77EB00AF4BF5 /* SampleCell1.xib */,
 				264F360A4DB2F6FFD3EA1E6B /* TableRowSpec.swift */,
 				3EFE02F41BFF90DF00AF4BF5 /* SampleCell2.xib */,
+				264F3255B1BDE9CEDF384C0B /* SampleCell2.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -281,6 +290,7 @@
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 				3EFE02F31BFF8CE400AF4BF5 /* TestCell1.xib in Resources */,
+				3EF9B84C1C048F2100B54ECE /* TestCell2.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,6 +404,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				3EF9B84D1C04908200B54ECE /* TestCell2.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,6 +416,7 @@
 				3E08DC411BFDD77D003B1840 /* ViewControllerTestingHelper.swift in Sources */,
 				264F375757D48441C774290A /* TableViewModelSpec.swift in Sources */,
 				264F3E30B0BB88A2B7135425 /* TableRowSpec.swift in Sources */,
+				264F32E522D6E32A8E39B5FA /* SampleCell2.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
