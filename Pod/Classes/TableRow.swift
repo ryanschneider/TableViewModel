@@ -7,6 +7,8 @@ public class TableRow {
     internal var cell: UITableViewCell?
     private var configureClosure: ((cell:UITableViewCell) -> ())?
     private var didSelectCellClosure: ((row:TableRow) -> ())?
+
+    public internal(set) var tableSection: TableSection?
     public var height: Float?
     public var shouldDeselectAfterSelection: Bool
 

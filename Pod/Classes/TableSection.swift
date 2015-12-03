@@ -61,10 +61,16 @@ public class TableSection: NSObject {
     }
 
     public func addRow(row: TableRow) {
+        row.tableSection = self
         observableRows().addObject(row)
     }
 
     public func removeRow(row: TableRow) {
+        guard self.indexOfRow(row) != NSNotFound else {
+            return
+        }
+
+        row.tableSection = nil
         observableRows().removeObject(row)
     }
 
@@ -74,6 +80,10 @@ public class TableSection: NSObject {
 
     public func rowAtIndex(index: Int) -> TableRow {
         return rows.objectAtIndex(index) as! TableRow
+    }
+
+    public func indexOfRow(row: TableRow) -> Int {
+        return rows.indexOfObject(row)
     }
 
     private func observableRows() -> NSMutableArray {
