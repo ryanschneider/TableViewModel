@@ -12,11 +12,14 @@ class ViewController: UIViewController {
 
         tableViewModel = TableViewModel(tableView: tableView)
 
-        let tableSection = TableSection(tableViewModel: tableViewModel)
+        let tableSection = TableSection()
         tableViewModel.addSection(tableSection)
 
         let row1 = TableRow(nibName: "TestCell1")
         tableSection.addRow(row1)
+
+        let dynamicHeightRow = TableRow(nibName: "DynamicHeightCell")
+        tableSection.addRow(dynamicHeightRow)
 
         for var i = 0; i < 40; i++ {
             let index = i
@@ -26,7 +29,7 @@ class ViewController: UIViewController {
                 let testCell = cell as! TestCell2
                 testCell.button.setTitle("Button \(index)", forState: UIControlState.Normal)
             }
-            row.height = 50
+            row.height = Float(50 + index)
             tableSection.addRow(row)
         }
     }

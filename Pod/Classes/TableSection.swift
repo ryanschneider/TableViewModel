@@ -3,16 +3,14 @@ import UIKit
 
 public class TableSection: NSObject {
 
-    public let tableView: UITableView
-    private weak var tableViewModel: TableViewModel?
+    public internal(set) var tableView: UITableView?
+    public internal(set) weak var tableViewModel: TableViewModel?
     public var rowAnimation: UITableViewRowAnimation
     internal var rows: NSMutableArray
 
-    public init(tableViewModel: TableViewModel) {
+    public init(rowAnimation: UITableViewRowAnimation = UITableViewRowAnimation.Fade) {
         rows = NSMutableArray()
-        tableView = tableViewModel.tableView
-        self.tableViewModel = tableViewModel
-        rowAnimation = UITableViewRowAnimation.Fade
+        self.rowAnimation = rowAnimation
 
         super.init()
 
@@ -29,11 +27,14 @@ public class TableSection: NSObject {
         }
 
         guard let tableViewModel = self.tableViewModel else {
-            NSException(name: "InvalidOperationException", reason: "This table section is not added to a table view model", userInfo: nil).raise()
             return
         }
 
         guard let kind: NSKeyValueChange = NSKeyValueChange(rawValue: change?[NSKeyValueChangeKindKey] as! UInt) else {
+            return
+        }
+
+        guard let tableView = self.tableView else {
             return
         }
 
@@ -47,7 +48,7 @@ public class TableSection: NSObject {
             indexPaths.append(indexPath)
         }
 
-        self.tableView.beginUpdates()
+        tableView.beginUpdates()
         switch kind {
         case .Insertion:
             tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: rowAnimation)

@@ -48,10 +48,18 @@ public class TableViewModel: NSObject, UITableViewDataSource, UITableViewDelegat
     }
 
     public func addSection(section: TableSection) {
+        section.tableViewModel = self
+        section.tableView = tableView
         observableSections().addObject(section)
     }
 
     public func removeSection(section: TableSection) {
+        guard self.indexOfSection(section) != NSNotFound else {
+            return
+        }
+
+        section.tableViewModel = nil
+        section.tableView = nil
         observableSections().removeObject(section)
     }
 
