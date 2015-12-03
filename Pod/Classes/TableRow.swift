@@ -18,9 +18,7 @@ public class TableRow {
     }
 
     public func cellForTableView(tableView: UITableView) -> UITableViewCell? {
-        if self.cell == nil {
-            self.cell = loadCellForTableView(tableView)
-        }
+        self.cell = loadCellForTableView(tableView)
 
         callConfigureCellClosure()
 
@@ -70,7 +68,14 @@ public class TableRow {
         closure(cell: cell)
     }
 
-    private func loadCellForTableView(tableView: UITableView) -> UITableViewCell? {
+    private func loadCellForTableView(tableViewOrNil: UITableView?) -> UITableViewCell? {
+        let tableView : UITableView
+        if tableViewOrNil == nil {
+            tableView = UITableView()
+        } else {
+            tableView = tableViewOrNil as UITableView!
+        }
+
         let dequeued = tableView.dequeueReusableCellWithIdentifier(nibName)
         if dequeued != nil {
             return dequeued
@@ -82,3 +87,4 @@ public class TableRow {
         }
     }
 }
+

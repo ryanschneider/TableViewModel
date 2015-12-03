@@ -18,7 +18,7 @@ class ViewController: UIViewController {
         let row1 = TableRow(nibName: "TestCell1")
         tableSection.addRow(row1)
 
-        for var i = 0; i < 45; i++ {
+        for var i = 0; i < 40; i++ {
             let index = i
             let row = TableRow(nibName: "TestCell2")
             row.configureCell {
