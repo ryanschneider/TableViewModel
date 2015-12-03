@@ -6,7 +6,7 @@ public class TableRow {
     private var bundle: NSBundle?
     internal var cell: UITableViewCell?
     private var configureClosure: ((cell:UITableViewCell) -> ())?
-    private var didSelectCellClosure: (() -> ())?
+    private var didSelectCellClosure: ((row:TableRow) -> ())?
     public var height: Float?
     public var shouldDeselectAfterSelection: Bool
 
@@ -43,7 +43,7 @@ public class TableRow {
 
     internal func selected() {
         if let closure = didSelectCellClosure {
-            closure()
+            closure(row: self)
         }
     }
 
@@ -52,7 +52,7 @@ public class TableRow {
         callConfigureCellClosure()
     }
 
-    public func didSelectCell(closure: () -> ()) {
+    public func didSelectCell(closure: (row:TableRow) -> ()) {
         didSelectCellClosure = closure
     }
 
@@ -69,7 +69,7 @@ public class TableRow {
     }
 
     private func loadCellForTableView(tableViewOrNil: UITableView?) -> UITableViewCell? {
-        let tableView : UITableView
+        let tableView: UITableView
         if tableViewOrNil == nil {
             tableView = UITableView()
         } else {

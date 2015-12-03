@@ -185,9 +185,13 @@ class TableViewModelSpec: QuickSpec {
 
                         context("when a selection handler is configured for the row") {
                             var selectionHandlerIsCalled: Bool!
+                            var rowParameterPassedToClosure: TableRow?
                             beforeEach {
                                 selectionHandlerIsCalled = false
+                                rowParameterPassedToClosure = nil
                                 row1.didSelectCell {
+                                    row in
+                                    rowParameterPassedToClosure = row
                                     selectionHandlerIsCalled = true
                                 }
                             }
@@ -205,6 +209,29 @@ class TableViewModelSpec: QuickSpec {
                                 it("deselects the cell by default") {
                                     var selectedRowIndexPath = tableView.indexPathForSelectedRow
                                     expect(selectedRowIndexPath).to(beNil())
+                                }
+
+                                it("passes correct row parameter to the closure") {
+                                    expect(rowParameterPassedToClosure) === row1
+                                }
+                            }
+                        }
+
+                        context("when row is configured for not deselcting the cell after selection") {
+                            beforeEach {
+                                row1.shouldDeselectAfterSelection = false
+                            }
+
+                            context("when the cell is selected") {
+                                beforeEach {
+                                    tableView.selectRowAtIndexPath(firstRowIndexPath(), animated: false, scrollPosition: UITableViewScrollPosition.Top)
+                                    model.tableView(tableView, didSelectRowAtIndexPath: firstRowIndexPath())
+                                }
+
+                                it("does not deselect the cell") {
+                                    var selectedRowIndexPath = tableView.indexPathForSelectedRow
+                                    expect(selectedRowIndexPath?.row) == firstRowIndexPath().row
+                                    expect(selectedRowIndexPath?.section) == firstRowIndexPath().section
                                 }
                             }
                         }
