@@ -16,6 +16,42 @@ class AcceptanceSpec: QuickSpec {
                 var model: TableViewModel!
                 var bundle: NSBundle!
 
+                /*
+                 * Shortcuts for accessing table cells
+                 */
+
+                func indexPathForRowInFirstSection(rowIndex: Int) -> NSIndexPath {
+                    return NSIndexPath(forRow: rowIndex, inSection: 0)
+                }
+
+                func firstRowIndexPath() -> NSIndexPath {
+                    return indexPathForRowInFirstSection(0)
+                }
+
+                func secondRowIndexPath() -> NSIndexPath {
+                    return indexPathForRowInFirstSection(1)
+                }
+
+                func thirdRowIndexPath() -> NSIndexPath {
+                    return indexPathForRowInFirstSection(2)
+                }
+
+                func cellAtIndexOfFirstSection(rowindex: Int) -> UITableViewCell? {
+                    return tableView.cellForRowAtIndexPath(indexPathForRowInFirstSection(rowindex))
+                }
+
+                func firstCell() -> UITableViewCell? {
+                    return cellAtIndexOfFirstSection(0)
+                }
+
+                func secondCell() -> UITableViewCell? {
+                    return cellAtIndexOfFirstSection(1)
+                }
+
+                func thirdCell() -> UITableViewCell? {
+                    return cellAtIndexOfFirstSection(2)
+                }
+
                 beforeEach {
                     bundle = NSBundle(forClass: self.dynamicType)
 
@@ -39,30 +75,6 @@ class AcceptanceSpec: QuickSpec {
                 }
 
                 context("when a section is added to the model") {
-
-                    func firstRowIndexPath() -> NSIndexPath {
-                        return NSIndexPath(forRow: 0, inSection: 0)
-                    }
-
-                    func secondRowIndexPath() -> NSIndexPath {
-                        return NSIndexPath(forRow: 1, inSection: 0)
-                    }
-
-                    func thirdRowIndexPath() -> NSIndexPath {
-                        return NSIndexPath(forRow: 2, inSection: 0)
-                    }
-
-                    func firstCell() -> UITableViewCell? {
-                        return tableView.cellForRowAtIndexPath(firstRowIndexPath())
-                    }
-
-                    func secondCell() -> UITableViewCell? {
-                        return tableView.cellForRowAtIndexPath(secondRowIndexPath())
-                    }
-
-                    func thirdCell() -> UITableViewCell? {
-                        return tableView.cellForRowAtIndexPath(thirdRowIndexPath())
-                    }
 
                     var section: TableSection!
 
@@ -354,19 +366,10 @@ class AcceptanceSpec: QuickSpec {
                             section.addRows(rows)
                         }
 
-                        func labelTextInCell(cellOrNil: UITableViewCell?) -> String {
-                            guard let cell = cellOrNil else {
-                                XCTFail("expected cell no to be nil")
-                                return ""
-                            }
-                            let label = cell.contentView.subviews[0] as! UILabel
-                            return label.text!
-                        }
-
                         it("adds each row to the table view") {
-                            expect(labelTextInCell(firstCell())) == "row1"
-                            expect(labelTextInCell(secondCell())) == "row2"
-                            expect(labelTextInCell(thirdCell())) == "row3"
+                            expect(firstCell()).to(beASampleCellWithLabelText("row1"))
+                            expect(secondCell()).to(beASampleCellWithLabelText("row2"))
+                            expect(thirdCell()).to(beASampleCellWithLabelText("row3"))
                         }
 
                         context("when multiple rows are removed from the section") {
@@ -376,7 +379,7 @@ class AcceptanceSpec: QuickSpec {
 
                             it("removes each row in the parameter array from the table view") {
                                 expect(tableView.numberOfRowsInSection(0)) == 1
-                                expect(labelTextInCell(firstCell())) == "row2"
+                                expect(firstCell()).to(beASampleCellWithLabelText("row2"))
                             }
                         }
                     }
@@ -391,6 +394,10 @@ class AcceptanceSpec: QuickSpec {
     }
 }
 
+/*
+ * Matchers for sample cells
+ */
+
 func beASampleCell1<T:UITableViewCell>() -> MatcherFunc<T?> {
     return MatcherFunc {
         actualExpression, failureMessage in
@@ -399,6 +406,20 @@ func beASampleCell1<T:UITableViewCell>() -> MatcherFunc<T?> {
             let cell = try actualExpression.evaluate() as? UITableViewCell
             let label = cell?.contentView.subviews[0] as? UILabel
             return label?.text == "SampleCell1"
+        } catch {
+            return false
+        }
+    }
+}
+
+func beASampleCellWithLabelText<T:UITableViewCell>(expectedLabelText: String) -> MatcherFunc<T?> {
+    return MatcherFunc {
+        actualExpression, failureMessage in
+        failureMessage.postfixMessage = " be a SampleCell1 with label text '\(expectedLabelText)'"
+        do {
+            let cell = try actualExpression.evaluate() as? UITableViewCell
+            let label = cell?.contentView.subviews[0] as? UILabel
+            return label?.text == expectedLabelText
         } catch {
             return false
         }
