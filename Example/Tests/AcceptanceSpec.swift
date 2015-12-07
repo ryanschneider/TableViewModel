@@ -339,27 +339,9 @@ class AcceptanceSpec: QuickSpec {
                         var row3: TableRow!
 
                         beforeEach {
-                            row1 = TableRow(nibName: "SampleCell1", inBundle: bundle)
-                            row2 = TableRow(nibName: "SampleCell1", inBundle: bundle)
-                            row3 = TableRow(nibName: "SampleCell1", inBundle: bundle)
-
-                            row1.configureCell {
-                                cell in
-                                let label = cell.contentView.subviews[0] as! UILabel
-                                label.text = "row1"
-                            }
-
-                            row2.configureCell {
-                                cell in
-                                let label = cell.contentView.subviews[0] as! UILabel
-                                label.text = "row2"
-                            }
-
-                            row3.configureCell {
-                                cell in
-                                let label = cell.contentView.subviews[0] as! UILabel
-                                label.text = "row3"
-                            }
+                            row1 = sampleRowWithLabelText("row1")
+                            row2 = sampleRowWithLabelText("row2")
+                            row3 = sampleRowWithLabelText("row3")
 
                             let rows: Array<TableRow> = [row1, row2, row3]
 
@@ -392,6 +374,16 @@ class AcceptanceSpec: QuickSpec {
 
         }
     }
+}
+
+func sampleRowWithLabelText(labelText: String) -> TableRow {
+    let row = TableRow(nibName: "SampleCell1", inBundle: NSBundle(forClass: AcceptanceSpec().dynamicType))
+    row.configureCell {
+        cell in
+        let label = cell.contentView.subviews[0] as! UILabel
+        label.text = labelText
+    }
+    return row
 }
 
 /*
