@@ -61,17 +61,32 @@ public class TableSection: NSObject {
     }
 
     public func addRow(row: TableRow) {
-        row.tableSection = self
+        assignTableSectionOfRow(row)
         observableRows().addObject(row)
     }
 
-    public func removeRow(row: TableRow) {
-        guard self.indexOfRow(row) != NSNotFound else {
-            return
-        }
+    public func addRows(rowsToAdd: Array<TableRow>) {
+        rowsToAdd.map(assignTableSectionOfRow)
+        let rowsProxy = self.observableRows()
+        let range = NSMakeRange(self.rows.count, rowsToAdd.count)
+        let indexes = NSIndexSet(indexesInRange: range)
+        rowsProxy.insertObjects(rowsToAdd, atIndexes: indexes)
+    }
 
-        row.tableSection = nil
+    public func removeRow(row: TableRow) {
+        removeTableSectionOfRow(row)
         observableRows().removeObject(row)
+    }
+
+    public func removeRows(rowsToRemove: Array<TableRow>) {
+        rowsToRemove.map(removeTableSectionOfRow)
+        let rowsProxy = self.observableRows()
+        var indexes = NSMutableIndexSet()
+        for row in rowsToRemove {
+            let index = self.indexOfRow(row)
+            indexes.addIndex(index)
+        }
+        rowsProxy.removeObjectsAtIndexes(indexes)
     }
 
     public func numberOfRows() -> Int {
@@ -84,6 +99,17 @@ public class TableSection: NSObject {
 
     public func indexOfRow(row: TableRow) -> Int {
         return rows.indexOfObject(row)
+    }
+
+    private func assignTableSectionOfRow(row: TableRow) {
+        row.tableSection = self
+    }
+
+    private func removeTableSectionOfRow(row: TableRow) {
+        guard self.indexOfRow(row) != NSNotFound else {
+            return
+        }
+        row.tableSection = nil
     }
 
     private func observableRows() -> NSMutableArray {

@@ -18,7 +18,7 @@ class TableSectionSpec: QuickSpec {
                 var row: TableRow!
 
                 beforeEach {
-                    row = TableRow(nibName: "SampleCell1", inBundle: NSBundle(forClass: self.dynamicType))
+                    row = TableRow(nibName: "", inBundle: NSBundle(forClass: self.dynamicType))
                     section.addRow(row)
                 }
 
@@ -43,7 +43,7 @@ class TableSectionSpec: QuickSpec {
 
                 beforeEach {
                     sectionOfRow = TableSection()
-                    row = TableRow(nibName: "SampleCell1")
+                    row = TableRow(nibName: "")
                     sectionOfRow.addRow(row)
 
                     section.removeRow(row)
@@ -51,6 +51,34 @@ class TableSectionSpec: QuickSpec {
 
                 it("doesn't change tableSection property value of the row") {
                     expect(row.tableSection) === sectionOfRow
+                }
+            }
+
+            context("multiple rows are added to the section") {
+                var row1: TableRow!
+                var row2: TableRow!
+
+                beforeEach {
+                    row1 = TableRow(nibName: "")
+                    row2 = TableRow(nibName: "")
+
+                    section.addRows([row1, row2])
+                }
+
+                it("sets the tableSection property of each row") {
+                    expect(row1.tableSection) === section
+                    expect(row2.tableSection) === section
+                }
+
+                context("when multiple rows are removed from the section") {
+                    beforeEach {
+                        section.removeRows([row1, row2])
+                    }
+
+                    it("sets the table section of each row to nil") {
+                        expect(row1.tableSection).to(beNil())
+                        expect(row2.tableSection).to(beNil())
+                    }
                 }
             }
         }

@@ -48,12 +48,20 @@ class AcceptanceSpec: QuickSpec {
                         return NSIndexPath(forRow: 1, inSection: 0)
                     }
 
+                    func thirdRowIndexPath() -> NSIndexPath {
+                        return NSIndexPath(forRow: 2, inSection: 0)
+                    }
+
                     func firstCell() -> UITableViewCell? {
                         return tableView.cellForRowAtIndexPath(firstRowIndexPath())
                     }
 
                     func secondCell() -> UITableViewCell? {
                         return tableView.cellForRowAtIndexPath(secondRowIndexPath())
+                    }
+
+                    func thirdCell() -> UITableViewCell? {
+                        return tableView.cellForRowAtIndexPath(thirdRowIndexPath())
                     }
 
                     var section: TableSection!
@@ -311,6 +319,70 @@ class AcceptanceSpec: QuickSpec {
                                 expect(cell?.frame.height) == CGFloat(100 + i)
                             }
                         }
+                    }
+
+                    context("when multiple rows are added to the section") {
+                        var row1: TableRow!
+                        var row2: TableRow!
+                        var row3: TableRow!
+
+                        beforeEach {
+                            row1 = TableRow(nibName: "SampleCell1", inBundle: bundle)
+                            row2 = TableRow(nibName: "SampleCell1", inBundle: bundle)
+                            row3 = TableRow(nibName: "SampleCell1", inBundle: bundle)
+
+                            row1.configureCell {
+                                cell in
+                                let label = cell.contentView.subviews[0] as! UILabel
+                                label.text = "row1"
+                            }
+
+                            row2.configureCell {
+                                cell in
+                                let label = cell.contentView.subviews[0] as! UILabel
+                                label.text = "row2"
+                            }
+
+                            row3.configureCell {
+                                cell in
+                                let label = cell.contentView.subviews[0] as! UILabel
+                                label.text = "row3"
+                            }
+
+                            let rows: Array<TableRow> = [row1, row2, row3]
+
+                            section.addRows(rows)
+                        }
+
+                        func labelTextInCell(cellOrNil: UITableViewCell?) -> String {
+                            guard let cell = cellOrNil else {
+                                XCTFail("expected cell no to be nil")
+                                return ""
+                            }
+                            let label = cell.contentView.subviews[0] as! UILabel
+                            return label.text!
+                        }
+
+                        it("adds each row to the table view") {
+                            expect(labelTextInCell(firstCell())) == "row1"
+                            expect(labelTextInCell(secondCell())) == "row2"
+                            expect(labelTextInCell(thirdCell())) == "row3"
+                        }
+
+                        context("when multiple rows are removed from the section") {
+                            beforeEach {
+                                section.removeRows([row1, row3])
+                            }
+
+                            it("removes each row in the parameter array from the table view") {
+                                expect(tableView.numberOfRowsInSection(0)) == 1
+                                expect(labelTextInCell(firstCell())) == "row2"
+                            }
+                        }
+                    }
+
+                    context("when a row is inserted into an index of a section") {
+
                     }
                 }
             }
