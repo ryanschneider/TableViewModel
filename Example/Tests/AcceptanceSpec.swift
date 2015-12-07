@@ -20,22 +20,6 @@ class AcceptanceSpec: QuickSpec {
                  * Shortcuts for accessing table cells
                  */
 
-                func indexPathForRowInFirstSection(rowIndex: Int) -> NSIndexPath {
-                    return NSIndexPath(forRow: rowIndex, inSection: 0)
-                }
-
-                func firstRowIndexPath() -> NSIndexPath {
-                    return indexPathForRowInFirstSection(0)
-                }
-
-                func secondRowIndexPath() -> NSIndexPath {
-                    return indexPathForRowInFirstSection(1)
-                }
-
-                func thirdRowIndexPath() -> NSIndexPath {
-                    return indexPathForRowInFirstSection(2)
-                }
-
                 func cellAtIndexOfFirstSection(rowindex: Int) -> UITableViewCell? {
                     return tableView.cellForRowAtIndexPath(indexPathForRowInFirstSection(rowindex))
                 }
@@ -367,13 +351,52 @@ class AcceptanceSpec: QuickSpec {
                     }
 
                     context("when a row is inserted into an index of a section") {
+                        var row1: TableRow!
+                        var row2: TableRow!
+                        var row3: TableRow!
 
+                        beforeEach {
+                            row1 = sampleRowWithLabelText("row1")
+                            row2 = sampleRowWithLabelText("row2")
+                            row3 = sampleRowWithLabelText("row3")
+
+                            let initialRows: Array<TableRow> = [row1, row3]
+
+                            section.addRows(initialRows)
+                            section.insertRow(row2, atIndex: 1)
+                        }
+
+                        it("places the inserted row to the correct index") {
+                            expect(firstCell()).to(beASampleCellWithLabelText("row1"))
+                            expect(secondCell()).to(beASampleCellWithLabelText("row2"))
+                            expect(thirdCell()).to(beASampleCellWithLabelText("row3"))
+                        }
                     }
                 }
             }
 
         }
     }
+}
+
+/*
+ * Utility functions
+ */
+
+func indexPathForRowInFirstSection(rowIndex: Int) -> NSIndexPath {
+    return NSIndexPath(forRow: rowIndex, inSection: 0)
+}
+
+func firstRowIndexPath() -> NSIndexPath {
+    return indexPathForRowInFirstSection(0)
+}
+
+func secondRowIndexPath() -> NSIndexPath {
+    return indexPathForRowInFirstSection(1)
+}
+
+func thirdRowIndexPath() -> NSIndexPath {
+    return indexPathForRowInFirstSection(2)
 }
 
 func sampleRowWithLabelText(labelText: String) -> TableRow {

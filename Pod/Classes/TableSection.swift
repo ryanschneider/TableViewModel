@@ -73,6 +73,11 @@ public class TableSection: NSObject {
         rowsProxy.insertObjects(rowsToAdd, atIndexes: indexes)
     }
 
+    public func insertRow(row: TableRow, atIndex index: Int) {
+        assignTableSectionOfRow(row)
+        observableRows().insertObject(row, atIndex: index)
+    }
+
     public func removeRow(row: TableRow) {
         removeTableSectionOfRow(row)
         observableRows().removeObject(row)

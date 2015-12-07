@@ -54,7 +54,7 @@ class TableSectionSpec: QuickSpec {
                 }
             }
 
-            context("multiple rows are added to the section") {
+            context("when multiple rows are added to the section") {
                 var row1: TableRow!
                 var row2: TableRow!
 
@@ -79,6 +79,23 @@ class TableSectionSpec: QuickSpec {
                         expect(row1.tableSection).to(beNil())
                         expect(row2.tableSection).to(beNil())
                     }
+                }
+            }
+
+            context("when a row is inserted to the section") {
+                var row1: TableRow!
+                var row2: TableRow!
+
+                beforeEach {
+                    row1 = TableRow(nibName: "")
+                    row2 = TableRow(nibName: "")
+
+                    section.addRow(row2)
+                    section.insertRow(row1, atIndex: 0)
+                }
+
+                it("sets the tableSection property of the inserted row") {
+                    expect(row1.tableSection) === section
                 }
             }
         }
