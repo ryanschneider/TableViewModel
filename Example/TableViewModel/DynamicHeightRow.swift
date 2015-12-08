@@ -1,8 +1,3 @@
-//
-// Created by Tunca Bergmen on 08/12/2015.
-// Copyright (c) 2015 CocoaPods. All rights reserved.
-//
-
 import Foundation
 import UIKit
 import TableViewModel
