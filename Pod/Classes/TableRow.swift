@@ -4,10 +4,10 @@ import UIKit
 public class TableRow {
     private let nibName: String
     private var bundle: NSBundle?
-    internal var cell: UITableViewCell?
     private var configureClosure: ((cell:UITableViewCell) -> ())?
     private var didSelectCellClosure: ((row:TableRow) -> ())?
 
+    public private(set) var cell: UITableViewCell?
     public internal(set) weak var tableSection: TableSection?
     public var height: Float?
     public var shouldDeselectAfterSelection: Bool

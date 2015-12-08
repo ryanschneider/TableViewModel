@@ -4,8 +4,6 @@ import TableViewModel
 
 class DynamicHeightRow: TableRow, DynamicHeightCellDelegate {
 
-    private var dynamicHeightCell: DynamicHeightCell?
-
     public init() {
         super.init(nibName: "DynamicHeightCell")
     }
@@ -21,7 +19,6 @@ class DynamicHeightRow: TableRow, DynamicHeightCellDelegate {
             return cell
         }
 
-        self.dynamicHeightCell = dynamicHeightCell
         dynamicHeightCell.delegate = self
 
         return cell
@@ -30,7 +27,7 @@ class DynamicHeightRow: TableRow, DynamicHeightCellDelegate {
     public func cellDidUpdateHeight(cell: DynamicHeightCell) {
         self.height = Float(cell.frame.height)
 
-        guard let cell = self.dynamicHeightCell else {
+        guard let cell = self.cell else {
             return
         }
 
