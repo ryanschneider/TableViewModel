@@ -11,6 +11,7 @@
 		264F32E522D6E32A8E39B5FA /* SampleCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264F3255B1BDE9CEDF384C0B /* SampleCell2.swift */; };
 		264F344FC048177F06DA99D1 /* TableSectionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264F3E5A0C976C44F0057445 /* TableSectionSpec.swift */; };
 		264F375757D48441C774290A /* AcceptanceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264F39211E2A8BCD7D1464EF /* AcceptanceSpec.swift */; };
+		264F39D0CDB4B6BFC3ED17E0 /* DynamicHeightRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264F30D746491CF8DC025F3A /* DynamicHeightRow.swift */; };
 		264F3DDA68C32C9C85442857 /* TableViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264F36EFC75BE6598D63D693 /* TableViewModelSpec.swift */; };
 		264F3E30B0BB88A2B7135425 /* TableRowSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264F360A4DB2F6FFD3EA1E6B /* TableRowSpec.swift */; };
 		3E08DC411BFDD77D003B1840 /* ViewControllerTestingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E30D43B1BFCB139000B8E77 /* ViewControllerTestingHelper.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		264F30D746491CF8DC025F3A /* DynamicHeightRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicHeightRow.swift; sourceTree = "<group>"; };
 		264F30DDE593F2B81D740DAA /* TestCell2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCell2.swift; sourceTree = "<group>"; };
 		264F3255B1BDE9CEDF384C0B /* SampleCell2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleCell2.swift; sourceTree = "<group>"; };
 		264F360A4DB2F6FFD3EA1E6B /* TableRowSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableRowSpec.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				264F30DDE593F2B81D740DAA /* TestCell2.swift */,
 				264F3981AEC55BF573F6BDF1 /* DynamicHeightCell.swift */,
 				3ED20B481C1064EE0018A821 /* DynamicHeightCell.xib */,
+				264F30D746491CF8DC025F3A /* DynamicHeightRow.swift */,
 			);
 			name = "Example for TableViewModel";
 			path = TableViewModel;
@@ -420,6 +423,7 @@
 				3EF9B84D1C04908200B54ECE /* TestCell2.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				264F306C5AF30F0D224154A3 /* DynamicHeightCell.swift in Sources */,
+				264F39D0CDB4B6BFC3ED17E0 /* DynamicHeightRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

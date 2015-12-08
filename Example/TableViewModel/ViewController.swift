@@ -18,7 +18,7 @@ class ViewController: UIViewController {
         let row1 = TableRow(nibName: "TestCell1")
         tableSection.addRow(row1)
 
-        let dynamicHeightRow = TableRow(nibName: "DynamicHeightCell")
+        let dynamicHeightRow = DynamicHeightRow()
         tableSection.addRow(dynamicHeightRow)
 
         for var i = 0; i < 40; i++ {
@@ -29,7 +29,7 @@ class ViewController: UIViewController {
                 let testCell = cell as! TestCell2
                 testCell.button.setTitle("Button \(index)", forState: UIControlState.Normal)
             }
-            row.height = Float(50 + index)
+            row.height = Float(50 + (index * 3))
             tableSection.addRow(row)
         }
     }
