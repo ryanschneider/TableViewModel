@@ -126,6 +126,10 @@ public class TableViewModel: NSObject, UITableViewDataSource, UITableViewDelegat
         return CGFloat(self.sectionAtIndex(sectionIndex).headerHeight)
     }
 
+    public func tableView(tableView: UITableView, titleForHeaderInSection sectionIndex: Int) -> String? {
+        return self.sectionAtIndex(sectionIndex).headerTitle
+    }
+
     private func observableSections() -> NSMutableArray {
         return mutableArrayValueForKey("sections")
     }

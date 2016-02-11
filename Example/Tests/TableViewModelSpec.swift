@@ -41,6 +41,7 @@ class TableViewModelSpec: QuickSpec {
 
                         section.headerView = headerView
                         section.headerHeight = Float(30)
+                        section.headerTitle = "Test Section"
                     }
 
                     it("returns correct header view when asked") {
@@ -49,6 +50,10 @@ class TableViewModelSpec: QuickSpec {
 
                     it("returns correct header view height when asked") {
                         expect(tableViewModel.tableView(tableView, heightForHeaderInSection: 0)) == 30
+                    }
+
+                    it("returns correct title for section when asked") {
+                        expect(tableViewModel.tableView(tableView, titleForHeaderInSection: 0)) == "Test Section"
                     }
                 }
 

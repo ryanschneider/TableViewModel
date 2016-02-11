@@ -7,9 +7,12 @@ public class TableSection: NSObject {
 
     public internal(set) var tableView: UITableView?
     public internal(set) weak var tableViewModel: TableViewModel?
+
     public var rowAnimation: UITableViewRowAnimation
+
     public var headerView: UIView?
     public var headerHeight: Float = 0
+    public var headerTitle: String? = nil
 
     public init(rowAnimation: UITableViewRowAnimation = UITableViewRowAnimation.Fade) {
         rows = NSMutableArray()
