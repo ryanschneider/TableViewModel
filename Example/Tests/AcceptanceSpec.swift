@@ -94,6 +94,16 @@ class AcceptanceSpec: QuickSpec {
                             expect(tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))).to(beASampleCell1())
                             expect(tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1))).to(beASampleCell2())
                         }
+
+                        context("when all sections are removed from the model") {
+                            beforeEach {
+                                model.removeAllSections()
+                            }
+
+                            it("has 0 sections") {
+                                expect(tableView.numberOfSections) == 0
+                            }
+                        }
                     }
 
                     context("when another section is inserted at index 0") {

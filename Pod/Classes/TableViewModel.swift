@@ -69,6 +69,13 @@ public class TableViewModel: NSObject, UITableViewDataSource, UITableViewDelegat
         observableSections().removeObject(section)
     }
 
+    public func removeAllSections() {
+        let sectionsProxy = self.observableSections()
+        let range = NSMakeRange(0, sectionsProxy.count)
+        let indexes = NSIndexSet(indexesInRange: range)
+        sectionsProxy.removeObjectsAtIndexes(indexes)
+    }
+
     public func indexOfSection(section: TableSection) -> Int {
         return sections.indexOfObject(section)
     }
