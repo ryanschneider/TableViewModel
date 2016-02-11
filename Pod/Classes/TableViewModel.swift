@@ -48,14 +48,12 @@ public class TableViewModel: NSObject, UITableViewDataSource, UITableViewDelegat
     }
 
     public func addSection(section: TableSection) {
-        section.tableViewModel = self
-        section.tableView = tableView
+        assignParentsToSection(section)
         observableSections().addObject(section)
     }
 
     public func insertSection(section: TableSection, atIndex index: Int) {
-        section.tableViewModel = self
-        section.tableView = tableView
+        assignParentsToSection(section)
         observableSections().insertObject(section, atIndex: index)
     }
 
@@ -64,16 +62,27 @@ public class TableViewModel: NSObject, UITableViewDataSource, UITableViewDelegat
             return
         }
 
-        section.tableViewModel = nil
-        section.tableView = nil
+        removeParentsFromSection(section)
         observableSections().removeObject(section)
     }
 
     public func removeAllSections() {
+        let allSections = self.sections as! [TableSection]
+        allSections.map(removeParentsFromSection)
         let sectionsProxy = self.observableSections()
         let range = NSMakeRange(0, sectionsProxy.count)
         let indexes = NSIndexSet(indexesInRange: range)
         sectionsProxy.removeObjectsAtIndexes(indexes)
+    }
+
+    private func assignParentsToSection(section: TableSection) {
+        section.tableViewModel = self
+        section.tableView = tableView
+    }
+
+    private func removeParentsFromSection(section: TableSection) {
+        section.tableViewModel = nil
+        section.tableView = nil
     }
 
     public func indexOfSection(section: TableSection) -> Int {

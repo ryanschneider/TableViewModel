@@ -98,6 +98,8 @@ public class TableSection: NSObject {
     }
 
     public func removeAllRows() {
+        let allRows = self.rows as! Array<TableRow>
+        allRows.map(removeTableSectionOfRow)
         let rowsProxy = self.observableRows()
         let range = NSMakeRange(0, rowsProxy.count)
         let indexes = NSIndexSet(indexesInRange: range)

@@ -35,6 +35,16 @@ class TableSectionSpec: QuickSpec {
                         expect(row.tableSection).to(beNil())
                     }
                 }
+
+                context("when all rows are removed from the section") {
+                    beforeEach {
+                        section.removeAllRows()
+                    }
+
+                    it("sets the tableSection property of the row to nil") {
+                        expect(row.tableSection).to(beNil())
+                    }
+                }
             }
 
             context("when removeRow is called with a row that wasn't added to the section") {
