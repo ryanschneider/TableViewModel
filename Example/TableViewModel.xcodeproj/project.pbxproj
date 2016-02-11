@@ -16,6 +16,7 @@
 		264F3E30B0BB88A2B7135425 /* TableRowSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264F360A4DB2F6FFD3EA1E6B /* TableRowSpec.swift */; };
 		3E08DC411BFDD77D003B1840 /* ViewControllerTestingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E30D43B1BFCB139000B8E77 /* ViewControllerTestingHelper.swift */; };
 		3E30D4481BFCB31B000B8E77 /* TableViewModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E30D4471BFCB31B000B8E77 /* TableViewModel.framework */; };
+		3E3C8EB21C17194A00B7B251 /* TestHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E3C8EB11C17194A00B7B251 /* TestHeaderView.xib */; };
 		3ED20B491C1064EE0018A821 /* DynamicHeightCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ED20B481C1064EE0018A821 /* DynamicHeightCell.xib */; };
 		3EF9B84C1C048F2100B54ECE /* TestCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EF9B84B1C048F2100B54ECE /* TestCell2.xib */; };
 		3EF9B84D1C04908200B54ECE /* TestCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264F30DDE593F2B81D740DAA /* TestCell2.swift */; };
@@ -56,6 +57,7 @@
 		3922A25F79961226AC900013 /* TableViewModel.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = TableViewModel.podspec; path = ../TableViewModel.podspec; sourceTree = "<group>"; };
 		3E30D43B1BFCB139000B8E77 /* ViewControllerTestingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerTestingHelper.swift; sourceTree = "<group>"; };
 		3E30D4471BFCB31B000B8E77 /* TableViewModel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TableViewModel.framework; path = "Pods/../build/Debug-iphoneos/TableViewModel.framework"; sourceTree = "<group>"; };
+		3E3C8EB11C17194A00B7B251 /* TestHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestHeaderView.xib; sourceTree = "<group>"; };
 		3ED20B481C1064EE0018A821 /* DynamicHeightCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicHeightCell.xib; sourceTree = "<group>"; };
 		3EF9B84B1C048F2100B54ECE /* TestCell2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestCell2.xib; sourceTree = "<group>"; };
 		3EFE02F01BFF77EB00AF4BF5 /* SampleCell1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SampleCell1.xib; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				264F3981AEC55BF573F6BDF1 /* DynamicHeightCell.swift */,
 				3ED20B481C1064EE0018A821 /* DynamicHeightCell.xib */,
 				264F30D746491CF8DC025F3A /* DynamicHeightRow.swift */,
+				3E3C8EB11C17194A00B7B251 /* TestHeaderView.xib */,
 			);
 			name = "Example for TableViewModel";
 			path = TableViewModel;
@@ -304,6 +307,7 @@
 				3ED20B491C1064EE0018A821 /* DynamicHeightCell.xib in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
+				3E3C8EB21C17194A00B7B251 /* TestHeaderView.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 				3EFE02F31BFF8CE400AF4BF5 /* TestCell1.xib in Resources */,
 				3EF9B84C1C048F2100B54ECE /* TestCell2.xib in Resources */,

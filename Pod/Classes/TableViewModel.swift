@@ -53,6 +53,12 @@ public class TableViewModel: NSObject, UITableViewDataSource, UITableViewDelegat
         observableSections().addObject(section)
     }
 
+    public func insertSection(section: TableSection, atIndex index: Int) {
+        section.tableViewModel = self
+        section.tableView = tableView
+        observableSections().insertObject(section, atIndex: index)
+    }
+
     public func removeSection(section: TableSection) {
         guard self.indexOfSection(section) != NSNotFound else {
             return
@@ -94,6 +100,10 @@ public class TableViewModel: NSObject, UITableViewDataSource, UITableViewDelegat
         if row.shouldDeselectAfterSelection {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
+    }
+
+    public func tableView(tableView: UITableView, viewForHeaderInSection sectionIndex: Int) -> UIView? {
+        return self.sectionAtIndex(sectionIndex).headerView
     }
 
     private func observableSections() -> NSMutableArray {

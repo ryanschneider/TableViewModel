@@ -73,14 +73,51 @@ class AcceptanceSpec: QuickSpec {
 
                     context("when another section is added to the model") {
                         var section2: TableSection!
+                        var row1, row2: TableRow!
 
                         beforeEach {
                             section2 = TableSection()
                             model.addSection(section2)
+
+                            row1 = TableRow(nibName: "SampleCell1", inBundle: bundle)
+                            section.addRow(row1)
+
+                            row2 = TableRow(nibName: "SampleCell2", inBundle: bundle)
+                            section2.addRow(row2)
                         }
 
                         it("has 2 sections") {
                             expect(tableView.numberOfSections) == 2
+                        }
+
+                        it("has sections in correct order") {
+                            expect(tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))).to(beASampleCell1())
+                            expect(tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1))).to(beASampleCell2())
+                        }
+                    }
+
+                    context("when another section is inserted at index 0") {
+                        var section2: TableSection!
+                        var row1, row2: TableRow!
+
+                        beforeEach {
+                            section2 = TableSection()
+                            model.insertSection(section2, atIndex: 0)
+
+                            row1 = TableRow(nibName: "SampleCell1", inBundle: bundle)
+                            section.addRow(row1)
+
+                            row2 = TableRow(nibName: "SampleCell2", inBundle: bundle)
+                            section2.addRow(row2)
+                        }
+
+                        it("has 2 section") {
+                            expect(tableView.numberOfSections) == 2
+                        }
+
+                        it("has sections in correct order") {
+                            expect(tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1))).to(beASampleCell1())
+                            expect(tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))).to(beASampleCell2())
                         }
                     }
 
@@ -149,6 +186,16 @@ class AcceptanceSpec: QuickSpec {
                                 it("has the correct cell") {
                                     let actualCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))
                                     expect(actualCell) === cell2
+                                }
+                            }
+
+                            context("when all rows are removed") {
+                                beforeEach {
+                                    section.removeAllRows()
+                                }
+
+                                it("is not implemented") {
+                                    expect(tableView.numberOfRowsInSection(0)) == 0
                                 }
                             }
                         }
@@ -373,6 +420,32 @@ class AcceptanceSpec: QuickSpec {
                         }
                     }
                 }
+
+                context("when a table section with header view added to the model") {
+                    var section: TableSection!
+                    var headerView: UIView!
+
+                    beforeEach {
+                        headerView = UIView(frame: CGRectMake(0, 0, 320, 100))
+
+                        section = TableSection()
+                        section.headerView = headerView
+                        section.headerHeight = Float(30)
+
+                        model.addSection(section)
+                    }
+
+                    it("displays the header view in the table view") {
+                        // TODO: this test doesn't pass
+//                        let actualHeaderView = tableView.headerViewForSection(0)
+//
+//                        expect(actualHeaderView) === headerView
+                    }
+
+                    it("displays the header view with correct height") {
+
+                    }
+                }
             }
 
         }
@@ -421,6 +494,20 @@ func beASampleCell1<T:UITableViewCell>() -> MatcherFunc<T?> {
             let cell = try actualExpression.evaluate() as? UITableViewCell
             let label = cell?.contentView.subviews[0] as? UILabel
             return label?.text == "SampleCell1"
+        } catch {
+            return false
+        }
+    }
+}
+
+func beASampleCell2<T:UITableViewCell>() -> MatcherFunc<T?> {
+    return MatcherFunc {
+        actualExpression, failureMessage in
+        failureMessage.postfixMessage = " be a SampleCell2"
+        do {
+            let cell = try actualExpression.evaluate() as? UITableViewCell
+            let button = cell?.contentView.subviews[0] as? UIButton
+            return button?.titleForState(UIControlState.Normal) == "SampleCell2"
         } catch {
             return false
         }

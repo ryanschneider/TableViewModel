@@ -3,10 +3,13 @@ import UIKit
 
 public class TableSection: NSObject {
 
+    internal var rows: NSMutableArray
+
     public internal(set) var tableView: UITableView?
     public internal(set) weak var tableViewModel: TableViewModel?
     public var rowAnimation: UITableViewRowAnimation
-    internal var rows: NSMutableArray
+    public var headerView: UIView?
+    public var headerHeight: Float = 0
 
     public init(rowAnimation: UITableViewRowAnimation = UITableViewRowAnimation.Fade) {
         rows = NSMutableArray()
@@ -91,6 +94,13 @@ public class TableSection: NSObject {
             let index = self.indexOfRow(row)
             indexes.addIndex(index)
         }
+        rowsProxy.removeObjectsAtIndexes(indexes)
+    }
+
+    public func removeAllRows() {
+        let rowsProxy = self.observableRows()
+        let range = NSMakeRange(0, rowsProxy.count)
+        let indexes = NSIndexSet(indexesInRange: range)
         rowsProxy.removeObjectsAtIndexes(indexes)
     }
 

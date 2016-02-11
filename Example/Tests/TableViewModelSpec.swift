@@ -46,6 +46,24 @@ class TableViewModelSpec: QuickSpec {
                         expect(section.tableView).to(beNil())
                     }
                 }
+
+                context("when a section is inserted to the table view model") {
+                    var insertedSection: TableSection!
+
+                    beforeEach {
+                        insertedSection = TableSection()
+                        tableViewModel.insertSection(insertedSection, atIndex: 0)
+                    }
+
+                    it("sets itself to the tableViewModel property of the inserted section") {
+                        expect(insertedSection.tableViewModel) === tableViewModel
+                    }
+
+                    it("sets itstableView to the tableView property of the section") {
+                        expect(insertedSection.tableView) === tableView
+                    }
+                }
+
             }
 
             context("when removeSection is called with a section that wasn't added to the tableViewModel") {
@@ -57,7 +75,7 @@ class TableViewModelSpec: QuickSpec {
                     section = TableSection()
 
                     tableViewOfSection = UITableView()
-                    tableViewModelOfSection = TableViewModel(tableView:tableViewOfSection)
+                    tableViewModelOfSection = TableViewModel(tableView: tableViewOfSection)
 
                     tableViewModelOfSection.addSection(section)
 

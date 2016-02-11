@@ -12,7 +12,11 @@ class ViewController: UIViewController {
 
         tableViewModel = TableViewModel(tableView: tableView)
 
+        let nib = UINib(nibName: "TestHeaderView", bundle: NSBundle.mainBundle())
+        let view = nib.instantiateWithOwner(nil, options: nil)[0] as! UIView
+
         let tableSection = TableSection()
+        tableSection.headerView = view
         tableViewModel.addSection(tableSection)
 
         let row1 = TableRow(nibName: "TestCell1")

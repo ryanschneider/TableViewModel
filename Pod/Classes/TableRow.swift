@@ -10,13 +10,11 @@ public class TableRow {
     public private(set) var cell: UITableViewCell?
     public internal(set) weak var tableSection: TableSection?
     public var height: Float?
-    public var shouldDeselectAfterSelection: Bool
+    public var shouldDeselectAfterSelection: Bool = true
 
     public init(nibName: String, inBundle bundle: NSBundle? = nil) {
         self.nibName = nibName
         self.bundle = bundle
-
-        shouldDeselectAfterSelection = true
     }
 
     public func cellForTableView(tableView: UITableView) -> UITableViewCell? {
@@ -58,7 +56,7 @@ public class TableRow {
         didSelectCellClosure = closure
     }
 
-    internal func callConfigureCellClosure() {
+    private func callConfigureCellClosure() {
         guard let closure = self.configureClosure else {
             return
         }
