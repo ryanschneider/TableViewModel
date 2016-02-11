@@ -44,7 +44,11 @@ class TableViewModelSpec: QuickSpec {
                     }
 
                     it("returns correct header view when asked") {
-                        expect(tableViewModel.tableView(tableView, viewForHeaderInSection:0)) === headerView
+                        expect(tableViewModel.tableView(tableView, viewForHeaderInSection: 0)) === headerView
+                    }
+
+                    it("returns correct header view height when asked") {
+                        expect(tableViewModel.tableView(tableView, heightForHeaderInSection: 0)) == 30
                     }
                 }
 
