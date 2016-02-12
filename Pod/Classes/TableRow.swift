@@ -12,8 +12,8 @@ public class TableRow {
     public var height: Float?
     public var shouldDeselectAfterSelection: Bool = true
 
-    public init(nibName: String, inBundle bundle: NSBundle? = nil) {
-        self.nibName = nibName
+    public init(cellNibName: String, inBundle bundle: NSBundle? = nil) {
+        self.nibName = cellNibName
         self.bundle = bundle
     }
 

@@ -18,7 +18,7 @@ class TableSectionSpec: QuickSpec {
                 var row: TableRow!
 
                 beforeEach {
-                    row = TableRow(nibName: "", inBundle: NSBundle(forClass: self.dynamicType))
+                    row = TableRow(cellNibName: "", inBundle: NSBundle(forClass: self.dynamicType))
                     section.addRow(row)
                 }
 
@@ -53,7 +53,7 @@ class TableSectionSpec: QuickSpec {
 
                 beforeEach {
                     sectionOfRow = TableSection()
-                    row = TableRow(nibName: "")
+                    row = TableRow(cellNibName: "")
                     sectionOfRow.addRow(row)
 
                     section.removeRow(row)
@@ -69,8 +69,8 @@ class TableSectionSpec: QuickSpec {
                 var row2: TableRow!
 
                 beforeEach {
-                    row1 = TableRow(nibName: "")
-                    row2 = TableRow(nibName: "")
+                    row1 = TableRow(cellNibName: "")
+                    row2 = TableRow(cellNibName: "")
 
                     section.addRows([row1, row2])
                 }
@@ -97,8 +97,8 @@ class TableSectionSpec: QuickSpec {
                 var row2: TableRow!
 
                 beforeEach {
-                    row1 = TableRow(nibName: "")
-                    row2 = TableRow(nibName: "")
+                    row1 = TableRow(cellNibName: "")
+                    row2 = TableRow(cellNibName: "")
 
                     section.addRow(row2)
                     section.insertRow(row1, atIndex: 0)

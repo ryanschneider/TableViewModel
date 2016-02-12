@@ -15,7 +15,7 @@ class TableRowSpec: QuickSpec {
             beforeEach {
                 bundle = NSBundle(forClass: self.dynamicType)
                 tableView = UITableView()
-                tableRow = TableRow(nibName: "SampleCell1", inBundle: bundle)
+                tableRow = TableRow(cellNibName: "SampleCell1", inBundle: bundle)
             }
 
             context("when asked for the cell") {
