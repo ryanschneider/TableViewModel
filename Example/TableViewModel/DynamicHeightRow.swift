@@ -5,7 +5,7 @@ import TableViewModel
 class DynamicHeightRow: TableRow, DynamicHeightCellDelegate {
 
     public init() {
-        super.init(nibName: "DynamicHeightCell")
+        super.init(cellNibName: "DynamicHeightCell")
     }
 
     public override func cellForTableView(tableView: UITableView) -> UITableViewCell? {
