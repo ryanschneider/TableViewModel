@@ -105,7 +105,7 @@ public class TableViewModel: NSObject, UITableViewDataSource, UITableViewDelegat
     }
 
     public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return rowForIndexPath(indexPath).cellHeight()
+        return rowForIndexPath(indexPath).heightForCell()
     }
 
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -138,7 +138,7 @@ public class TableViewModel: NSObject, UITableViewDataSource, UITableViewDelegat
         return sections[index] as! TableSection
     }
 
-    private func rowForIndexPath(indexPath: NSIndexPath) -> TableRow {
+    private func rowForIndexPath(indexPath: NSIndexPath) -> TableRowProtocol {
         let section = sections[indexPath.section] as! TableSection
         let row = section.rowAtIndex(indexPath.row)
         return row

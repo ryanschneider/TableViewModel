@@ -1,11 +1,23 @@
 import Foundation
 import UIKit
 
-public class TableRow {
+public protocol TableRowProtocol {
+
+    func cellForTableView(tableView: UITableView) -> UITableViewCell?
+
+    func heightForCell() -> CGFloat
+
+    func selected()
+
+    var shouldDeselectAfterSelection: Bool { get }
+
+}
+
+public class TableRow: TableRowProtocol {
     private let nibName: String
     private var bundle: NSBundle?
     private var configureClosure: ((cell:UITableViewCell) -> ())?
-    private var didSelectCellClosure: ((row:TableRow) -> ())?
+    private var onSelectionClosure: ((row:TableRow) -> ())?
 
     public private(set) var cell: UITableViewCell?
     public internal(set) weak var tableSection: TableSection?
@@ -33,7 +45,7 @@ public class TableRow {
         return cell
     }
 
-    internal func cellHeight() -> CGFloat {
+    public func heightForCell() -> CGFloat {
         if let height = self.height {
             return CGFloat(height)
         }
@@ -41,8 +53,8 @@ public class TableRow {
         return 44
     }
 
-    internal func selected() {
-        if let closure = didSelectCellClosure {
+    public func selected() {
+        if let closure = onSelectionClosure {
             closure(row: self)
         }
     }
@@ -52,8 +64,8 @@ public class TableRow {
         callConfigureCellClosure()
     }
 
-    public func didSelectCell(closure: (row:TableRow) -> ()) {
-        didSelectCellClosure = closure
+    public func onSelection(closure: (row:TableRow) -> ()) {
+        onSelectionClosure = closure
     }
 
     private func callConfigureCellClosure() {
