@@ -204,7 +204,7 @@ class AcceptanceSpec: QuickSpec {
                                     section.removeAllRows()
                                 }
 
-                                it("is not implemented") {
+                                it("removes all rows section") {
                                     expect(tableView.numberOfRowsInSection(0)) == 0
                                 }
                             }
