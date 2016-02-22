@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-public protocol TableRowProtocol {
+public protocol TableRowProtocol : class, AnyObject {
 
     func cellForTableView(tableView: UITableView) -> UITableViewCell?
 
@@ -11,6 +11,7 @@ public protocol TableRowProtocol {
 
     var shouldDeselectAfterSelection: Bool { get }
 
+    var tableSection: TableSection? { get set }
 }
 
 public class TableRow: TableRowProtocol {
@@ -20,7 +21,7 @@ public class TableRow: TableRowProtocol {
     private var onSelectionClosure: ((row:TableRow) -> ())?
 
     public private(set) var cell: UITableViewCell?
-    public internal(set) weak var tableSection: TableSection?
+    public weak var tableSection: TableSection?
     public var height: Float?
     public var shouldDeselectAfterSelection: Bool = true
 

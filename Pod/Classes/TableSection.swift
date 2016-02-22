@@ -66,30 +66,34 @@ public class TableSection: NSObject {
         tableView.endUpdates()
     }
 
-    public func addRow(row: TableRow) {
+    public func addRow(row: TableRowProtocol) {
         assignTableSectionOfRow(row)
         observableRows().addObject(row)
     }
 
-    public func addRows(rowsToAdd: Array<TableRow>) {
+    public func addRows(rowsToAdd: Array<TableRowProtocol>) {
         rowsToAdd.map(assignTableSectionOfRow)
+        let rowObjects = rowsToAdd.map {
+            row in
+            return row as AnyObject
+        }
         let rowsProxy = self.observableRows()
-        let range = NSMakeRange(self.rows.count, rowsToAdd.count)
+        let range = NSMakeRange(self.rows.count, rowObjects.count)
         let indexes = NSIndexSet(indexesInRange: range)
-        rowsProxy.insertObjects(rowsToAdd, atIndexes: indexes)
+        rowsProxy.insertObjects(rowObjects, atIndexes: indexes)
     }
 
-    public func insertRow(row: TableRow, atIndex index: Int) {
+    public func insertRow(row: TableRowProtocol, atIndex index: Int) {
         assignTableSectionOfRow(row)
         observableRows().insertObject(row, atIndex: index)
     }
 
-    public func removeRow(row: TableRow) {
+    public func removeRow(row: TableRowProtocol) {
         removeTableSectionOfRow(row)
         observableRows().removeObject(row)
     }
 
-    public func removeRows(rowsToRemove: Array<TableRow>) {
+    public func removeRows(rowsToRemove: Array<TableRowProtocol>) {
         rowsToRemove.map(removeTableSectionOfRow)
         let rowsProxy = self.observableRows()
         var indexes = NSMutableIndexSet()
@@ -101,7 +105,10 @@ public class TableSection: NSObject {
     }
 
     public func removeAllRows() {
-        let allRows = self.rows as! Array<TableRow>
+        let allRows = self.rows.map {
+            row in
+            return row as! TableRowProtocol
+        }
         allRows.map(removeTableSectionOfRow)
         let rowsProxy = self.observableRows()
         let range = NSMakeRange(0, rowsProxy.count)
@@ -113,19 +120,20 @@ public class TableSection: NSObject {
         return rows.count
     }
 
-    public func rowAtIndex(index: Int) -> TableRow {
-        return rows.objectAtIndex(index) as! TableRow
+    public func rowAtIndex(index: Int) -> TableRowProtocol {
+        return rows.objectAtIndex(index) as! TableRowProtocol
     }
 
-    public func indexOfRow(row: TableRow) -> Int {
+    public func indexOfRow(row: TableRowProtocol) -> Int {
         return rows.indexOfObject(row)
     }
 
-    private func assignTableSectionOfRow(row: TableRow) {
+    private func assignTableSectionOfRow(row: TableRowProtocol) -> AnyObject {
         row.tableSection = self
+        return row as! AnyObject
     }
 
-    private func removeTableSectionOfRow(row: TableRow) {
+    private func removeTableSectionOfRow(row: TableRowProtocol) {
         guard self.indexOfRow(row) != NSNotFound else {
             return
         }

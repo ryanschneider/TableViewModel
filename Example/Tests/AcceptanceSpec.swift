@@ -384,7 +384,7 @@ class AcceptanceSpec: QuickSpec {
                             row2 = sampleRowWithLabelText("row2")
                             row3 = sampleRowWithLabelText("row3")
 
-                            let rows: Array<TableRow> = [row1, row2, row3]
+                            let rows: Array<TableRowProtocol> = [row1, row2, row3]
 
                             section.addRows(rows)
                         }
@@ -417,7 +417,7 @@ class AcceptanceSpec: QuickSpec {
                             row2 = sampleRowWithLabelText("row2")
                             row3 = sampleRowWithLabelText("row3")
 
-                            let initialRows: Array<TableRow> = [row1, row3]
+                            let initialRows: Array<TableRowProtocol> = [row1, row3]
 
                             section.addRows(initialRows)
                             section.insertRow(row2, atIndex: 1)
