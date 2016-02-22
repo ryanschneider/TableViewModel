@@ -65,7 +65,7 @@ public class TableRow: TableRowProtocol {
         callConfigureCellClosure()
     }
 
-    public func onSelection(closure: (row:TableRow) -> ()) {
+    public func onSelect(closure: (row:TableRow) -> ()) {
         onSelectionClosure = closure
     }
 

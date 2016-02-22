@@ -250,7 +250,7 @@ class AcceptanceSpec: QuickSpec {
                             beforeEach {
                                 selectionHandlerIsCalled = false
                                 rowParameterPassedToClosure = nil
-                                row1.onSelection {
+                                row1.onSelect {
                                     row in
                                     rowParameterPassedToClosure = row
                                     selectionHandlerIsCalled = true
