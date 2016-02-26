@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-public protocol TableRowProtocol : class, AnyObject {
+public protocol TableRowProtocol: class, AnyObject {
 
     func cellForTableView(tableView: UITableView) -> UITableViewCell?
 
@@ -15,7 +15,7 @@ public protocol TableRowProtocol : class, AnyObject {
 }
 
 public class TableRow: TableRowProtocol {
-    private let nibName: String
+    private let cellIdentifier: String
     private var bundle: NSBundle?
     private var configureClosure: ((cell:UITableViewCell) -> ())?
     private var onSelectionClosure: ((row:TableRow) -> ())?
@@ -25,8 +25,8 @@ public class TableRow: TableRowProtocol {
     public var height: Float?
     public var shouldDeselectAfterSelection: Bool = true
 
-    public init(cellNibName: String, inBundle bundle: NSBundle? = nil) {
-        self.nibName = cellNibName
+    public init(cellIdentifier: String, inBundle bundle: NSBundle? = nil) {
+        self.cellIdentifier = cellIdentifier
         self.bundle = bundle
     }
 
@@ -89,13 +89,13 @@ public class TableRow: TableRowProtocol {
             tableView = tableViewOrNil as UITableView!
         }
 
-        let dequeued = tableView.dequeueReusableCellWithIdentifier(nibName)
+        let dequeued = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)
         if dequeued != nil {
             return dequeued
         } else {
-            let nib: UINib = UINib(nibName: nibName, bundle: bundle)
-            tableView.registerNib(nib, forCellReuseIdentifier: nibName)
-            let cell = tableView.dequeueReusableCellWithIdentifier(nibName)
+            let nib: UINib = UINib(nibName: cellIdentifier, bundle: bundle)
+            tableView.registerNib(nib, forCellReuseIdentifier: cellIdentifier)
+            let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)
             return cell
         }
     }

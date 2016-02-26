@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         tableSection.headerView = view
         tableViewModel.addSection(tableSection)
 
-        let row1 = TableRow(cellNibName: "TestCell1")
+        let row1 = TableRow(cellIdentifier: "TestCell1")
         tableSection.addRow(row1)
 
         let dynamicHeightRow = DynamicHeightRow()
@@ -27,7 +27,7 @@ class ViewController: UIViewController {
 
         for var i = 0; i < 40; i++ {
             let index = i
-            let row = TableRow(cellNibName: "TestCell2")
+            let row = TableRow(cellIdentifier: "TestCell2")
             row.configureCell {
                 cell in
                 let testCell = cell as! TestCell2

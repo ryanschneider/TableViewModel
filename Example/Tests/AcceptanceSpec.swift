@@ -79,10 +79,10 @@ class AcceptanceSpec: QuickSpec {
                             section2 = TableSection()
                             model.addSection(section2)
 
-                            row1 = TableRow(cellNibName: "SampleCell1", inBundle: bundle)
+                            row1 = TableRow(cellIdentifier: "SampleCell1", inBundle: bundle)
                             section.addRow(row1)
 
-                            row2 = TableRow(cellNibName: "SampleCell2", inBundle: bundle)
+                            row2 = TableRow(cellIdentifier: "SampleCell2", inBundle: bundle)
                             section2.addRow(row2)
                         }
 
@@ -114,10 +114,10 @@ class AcceptanceSpec: QuickSpec {
                             section2 = TableSection()
                             model.insertSection(section2, atIndex: 0)
 
-                            row1 = TableRow(cellNibName: "SampleCell1", inBundle: bundle)
+                            row1 = TableRow(cellIdentifier: "SampleCell1", inBundle: bundle)
                             section.addRow(row1)
 
-                            row2 = TableRow(cellNibName: "SampleCell2", inBundle: bundle)
+                            row2 = TableRow(cellIdentifier: "SampleCell2", inBundle: bundle)
                             section2.addRow(row2)
                         }
 
@@ -146,7 +146,7 @@ class AcceptanceSpec: QuickSpec {
                         var row1: TableRow!
 
                         beforeEach {
-                            row1 = TableRow(cellNibName: "SampleCell1", inBundle: bundle)
+                            row1 = TableRow(cellIdentifier: "SampleCell1", inBundle: bundle)
                             section.addRow(row1)
                         }
 
@@ -163,7 +163,7 @@ class AcceptanceSpec: QuickSpec {
                             var row2: TableRow!
 
                             beforeEach {
-                                row2 = TableRow(cellNibName: "SampleCell1", inBundle: bundle)
+                                row2 = TableRow(cellIdentifier: "SampleCell1", inBundle: bundle)
                                 section.addRow(row2)
                             }
 
@@ -228,7 +228,7 @@ class AcceptanceSpec: QuickSpec {
 
                         context("when a configuration closure is added to the row before adding the row to a section") {
                             beforeEach {
-                                let row2 = TableRow(cellNibName: "SampleCell1", inBundle: bundle)
+                                let row2 = TableRow(cellIdentifier: "SampleCell1", inBundle: bundle)
                                 row2.configureCell {
                                     cell in
                                     let label = cell.contentView.subviews[0] as! UILabel
@@ -327,7 +327,7 @@ class AcceptanceSpec: QuickSpec {
 
                     context("when a row with custom height cell added to the section") {
                         beforeEach {
-                            let row = TableRow(cellNibName: "SampleCell2", inBundle: bundle)
+                            let row = TableRow(cellIdentifier: "SampleCell2", inBundle: bundle)
                             section.addRow(row)
                         }
 
@@ -339,7 +339,7 @@ class AcceptanceSpec: QuickSpec {
 
                     context("when height of cell is given externally") {
                         beforeEach {
-                            let row = TableRow(cellNibName: "SampleCell2", inBundle: bundle)
+                            let row = TableRow(cellIdentifier: "SampleCell2", inBundle: bundle)
                             row.height = 120
                             section.addRow(row)
                         }
@@ -357,7 +357,7 @@ class AcceptanceSpec: QuickSpec {
                             rows = Array<TableRow>()
 
                             for var i = 1; i < 20; i++ {
-                                let row = TableRow(cellNibName: "SampleCell1", inBundle: bundle)
+                                let row = TableRow(cellIdentifier: "SampleCell1", inBundle: bundle)
                                 row.height = Float(100 + i)
                                 rows.append(row)
                                 section.addRow(row)
@@ -486,7 +486,7 @@ func thirdRowIndexPath() -> NSIndexPath {
 }
 
 func sampleRowWithLabelText(labelText: String) -> TableRow {
-    let row = TableRow(cellNibName: "SampleCell1", inBundle: NSBundle(forClass: AcceptanceSpec().dynamicType))
+    let row = TableRow(cellIdentifier: "SampleCell1", inBundle: NSBundle(forClass: AcceptanceSpec().dynamicType))
     row.configureCell {
         cell in
         let label = cell.contentView.subviews[0] as! UILabel
