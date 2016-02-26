@@ -111,7 +111,7 @@ public class TableViewModel: NSObject, UITableViewDataSource, UITableViewDelegat
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let row = rowForIndexPath(indexPath)
 
-        row.selected()
+        row.select()
 
         if row.shouldDeselectAfterSelection {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)

@@ -12,7 +12,7 @@ class ViewController: UIViewController {
 
         tableViewModel = TableViewModel(tableView: self.tableView)
 
-        prototypeSection = TableSection()
+        let prototypeSection = TableSection()
         prototypeSection.headerTitle = "Prototype Cells"
         prototypeSection.headerHeight = 30
         tableViewModel.addSection(prototypeSection)

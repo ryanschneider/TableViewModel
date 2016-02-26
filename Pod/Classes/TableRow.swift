@@ -7,7 +7,7 @@ public protocol TableRowProtocol: class, AnyObject {
 
     func heightForCell() -> CGFloat
 
-    func selected()
+    func select()
 
     var shouldDeselectAfterSelection: Bool { get }
 
