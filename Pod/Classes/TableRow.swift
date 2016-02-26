@@ -24,6 +24,7 @@ public class TableRow: TableRowProtocol {
     public weak var tableSection: TableSection?
     public var height: Float?
     public var shouldDeselectAfterSelection: Bool = true
+    public var userObjet: AnyObject?
 
     public init(cellIdentifier: String, inBundle bundle: NSBundle? = nil) {
         self.cellIdentifier = cellIdentifier
