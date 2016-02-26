@@ -54,7 +54,7 @@ public class TableRow: TableRowProtocol {
         return 44
     }
 
-    public func selected() {
+    public func select() {
         if let closure = onSelectionClosure {
             closure(row: self)
         }
