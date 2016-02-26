@@ -10,32 +10,24 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableViewModel = TableViewModel(tableView: tableView)
+        tableViewModel = TableViewModel(tableView: self.tableView)
 
-        let nib = UINib(nibName: "TestHeaderView", bundle: NSBundle.mainBundle())
-        let view = nib.instantiateWithOwner(nil, options: nil)[0] as! UIView
+        prototypeSection = TableSection()
+        prototypeSection.headerTitle = "Prototype Cells"
+        prototypeSection.headerHeight = 30
+        tableViewModel.addSection(prototypeSection)
 
-        let tableSection = TableSection()
-        tableSection.headerView = view
-        tableViewModel.addSection(tableSection)
+        let staticPrototypeRow = TableRow(cellIdentifier: "StaticPrototypeCell")
+        prototypeSection.addRow(staticPrototypeRow)
 
-        let row1 = TableRow(cellIdentifier: "TestCell1")
-        tableSection.addRow(row1)
-
-        let dynamicHeightRow = DynamicHeightRow()
-        tableSection.addRow(dynamicHeightRow)
-
-        for var i = 0; i < 40; i++ {
-            let index = i
-            let row = TableRow(cellIdentifier: "TestCell2")
-            row.configureCell {
-                cell in
-                let testCell = cell as! TestCell2
-                testCell.button.setTitle("Button \(index)", forState: UIControlState.Normal)
-            }
-            row.height = Float(50 + (index * 3))
-            tableSection.addRow(row)
+        let customPrototypeRow = TableRow(cellIdentifier: "CustomPrototypeCell")
+        customPrototypeRow.configureCell {
+            cell in
+            let customCell = cell as! CustomPrototypeCell
+            customCell.label.text = "Custom label text"
         }
+        prototypeSection.addRow(customPrototypeRow)
+
     }
 
     override func didReceiveMemoryWarning() {
