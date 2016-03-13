@@ -6,33 +6,133 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
     var tableViewModel: TableViewModel!
+    var topSection: TableSection!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableViewModel = TableViewModel(tableView: self.tableView)
 
-        let prototypeSection = TableSection()
-        prototypeSection.headerTitle = "Prototype Cells"
-        prototypeSection.headerHeight = 30
-        tableViewModel.addSection(prototypeSection)
+        addFeedSection()
+        addRemovableSection()
+        self.performSelector("insertGiveFeedbackRow", withObject: nil, afterDelay: 3)
+        self.performSelector("insertRemovableRow", withObject: nil, afterDelay: 5)
+        self.performSelector("insertFeedRow", withObject: nil, afterDelay: 7)
+    }
 
-        let staticPrototypeRow = TableRow(cellIdentifier: "StaticPrototypeCell")
-        prototypeSection.addRow(staticPrototypeRow)
+    func addFeedSection() {
+        // Create the section and add it to the model
+        topSection = TableSection()
+        topSection.headerTitle = "Newsfeed"
+        topSection.headerHeight = 30
+        tableViewModel.addSection(topSection)
 
-        let customPrototypeRow = TableRow(cellIdentifier: "CustomPrototypeCell")
-        customPrototypeRow.configureCell {
-            cell in
-            let customCell = cell as! CustomPrototypeCell
-            customCell.label.text = "Custom label text"
+        // Get the sample data for this section
+        let sampleFeed = FeedItem.initialItems()
+
+        // Create rows for feed items
+        for feedItem in sampleFeed {
+            // Create a row for each feed item
+            let row = TableRow(cellIdentifier: "FeedCell")
+
+            // Configure the cell
+            configureFeedRow(row, withFeedItem: feedItem)
+
+            // Add the row to the section
+            topSection.addRow(row)
         }
-        prototypeSection.addRow(customPrototypeRow)
 
+        // Add a spacer to the bottom of the section
+        topSection.addRow(TableRow(cellIdentifier: "SpacerCell"))
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func onLike(feedItem: FeedItem) {
+        self.alert("Liked: \(feedItem.user.name)")
     }
+
+    func onShare(feedItem: FeedItem) {
+        self.alert("Shared: \(feedItem.user.name)")
+    }
+
+    func addRemovableSection() {
+        // Create the section and add it to the model
+        let removableSection = TableSection()
+        tableViewModel.addSection(removableSection)
+
+        // Create the header for the section and set it as the header view of section
+        let removableSectionHeader = NSBundle.mainBundle().loadNibNamed("RemovableSectionHeader", owner: nil, options: nil)[0] as! RemovableSectionHeader
+        removableSection.headerView = removableSectionHeader
+        removableSection.headerHeight = 30
+
+        // When remove button is tapped on the header view, remove the section from the model
+        removableSectionHeader.onRemoveTap {
+            self.tableViewModel.removeSection(removableSection)
+        }
+
+        // Create rows for sample feed items
+        let removableItems = FeedItem.removableSectionItems()
+        for feedItem in removableItems {
+            let row = TableRow(cellIdentifier: "FeedCell")
+            configureFeedRow(row, withFeedItem: feedItem)
+            removableSection.addRow(row)
+        }
+
+        // Add a specer to the bottom of the section
+        removableSection.addRow(TableRow(cellIdentifier: "SpacerCell"))
+    }
+
+    func insertGiveFeedbackRow() {
+        topSection.rowAnimation = UITableViewRowAnimation.Top
+        let row = TableRow(cellIdentifier: "GiveFeedbackCell")
+        row.onSelect {
+            row in
+            self.alert("Feedback row clicked!")
+        }
+        topSection.insertRow(row, atIndex: 0)
+    }
+
+    func insertRemovableRow() {
+        topSection.rowAnimation = UITableViewRowAnimation.Right
+        let row = TableRow(cellIdentifier: "RemovableCell")
+        row.onSelect {
+            row in
+            self.topSection.removeRow(row)
+        }
+        topSection.insertRow(row, atIndex: 1)
+    }
+
+    func insertFeedRow() {
+        topSection.rowAnimation = UITableViewRowAnimation.Left
+        let feedItem = FeedItem.toBeAddedLater()
+        let row = TableRow(cellIdentifier: "FeedCell")
+        configureFeedRow(row, withFeedItem: feedItem)
+        topSection.insertRow(row, atIndex: topSection.numberOfRows() - 1)
+    }
+
+    func configureFeedRow(row: TableRow, withFeedItem feedItem: FeedItem) {
+        row.configureCell {
+            cell in
+            let feedCell = cell as! FeedCell
+            feedCell.feedItem = feedItem
+            feedCell.onLike = self.onLike
+            feedCell.onShare = self.onShare
+
+            // Cell height will change based on length of the comment. FeedCell will calculate
+            // own height based on the feedItem given. We need to set this value as the height
+            // of row.
+            row.height = feedCell.cellHeight
+        }
+    }
+
+    func alert(message: String) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) {
+            action in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        alert.addAction(cancelAction)
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+
 }
 
