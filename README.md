@@ -22,7 +22,7 @@ pod "TableViewModel"
 
 ## Author
 
-tbergmen, tbergmen@gmail.com
+Tunca Bergmen, tunca@bergmen.com
 
 ## License
 
