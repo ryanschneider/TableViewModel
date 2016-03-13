@@ -3,13 +3,13 @@
   "version": "0.1.0",
   "summary": "A short description of TableViewModel.",
   "description": "",
-  "homepage": "https://github.com/<GITHUB_USERNAME>/TableViewModel",
+  "homepage": "https://github.com/tbergmen/TableViewModel",
   "license": "MIT",
   "authors": {
-    "tbergmen": "tbergmen@gmail.com"
+    "tbergmen": "tunca@bergmen.com"
   },
   "source": {
-    "git": "https://github.com/<GITHUB_USERNAME>/TableViewModel.git",
+    "git": "https://github.com/tbergmen/TableViewModel.git",
     "tag": "0.1.0"
   },
   "platforms": {

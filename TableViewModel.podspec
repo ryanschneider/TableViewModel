@@ -19,11 +19,11 @@ Pod::Spec.new do |s|
   s.description      = <<-DESC
                        DESC
 
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/TableViewModel"
+  s.homepage         = "https://github.com/tbergmen/TableViewModel"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
-  s.author           = { "tbergmen" => "tbergmen@gmail.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/TableViewModel.git", :tag => s.version.to_s }
+  s.author           = { "tbergmen" => "tunca@bergmen.com" }
+  s.source           = { :git => "https://github.com/tbergmen/TableViewModel.git", :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.platform     = :ios, '8.0'

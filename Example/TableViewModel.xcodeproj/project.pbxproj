@@ -12,7 +12,6 @@
 		264F36A99FA3D2F61C344154 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264F387CCFBF7D1B30CFD68A /* FeedCell.swift */; };
 		264F36DF213414BC4AAC1363 /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264F3DBDC59597AE89F3B95B /* FeedItem.swift */; };
 		264F375757D48441C774290A /* AcceptanceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264F39211E2A8BCD7D1464EF /* AcceptanceSpec.swift */; };
-		264F3D438CBD24DCA204D225 /* CustomPrototypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264F3BAAD0AE82928AA3B54A /* CustomPrototypeCell.swift */; };
 		264F3DDA68C32C9C85442857 /* TableViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264F36EFC75BE6598D63D693 /* TableViewModelSpec.swift */; };
 		264F3DDF3D097E9537F4389C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264F3E9DF715B96D9BE188CB /* User.swift */; };
 		264F3E30B0BB88A2B7135425 /* TableRowSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264F360A4DB2F6FFD3EA1E6B /* TableRowSpec.swift */; };
@@ -53,7 +52,6 @@
 		264F36EFC75BE6598D63D693 /* TableViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewModelSpec.swift; sourceTree = "<group>"; };
 		264F387CCFBF7D1B30CFD68A /* FeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		264F39211E2A8BCD7D1464EF /* AcceptanceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AcceptanceSpec.swift; sourceTree = "<group>"; };
-		264F3BAAD0AE82928AA3B54A /* CustomPrototypeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPrototypeCell.swift; sourceTree = "<group>"; };
 		264F3DBDC59597AE89F3B95B /* FeedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
 		264F3E5A0C976C44F0057445 /* TableSectionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableSectionSpec.swift; sourceTree = "<group>"; };
 		264F3E9DF715B96D9BE188CB /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -179,7 +177,6 @@
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
-				264F3BAAD0AE82928AA3B54A /* CustomPrototypeCell.swift */,
 				264F3DD8869F21DFC87A21F6 /* FeedExample */,
 			);
 			name = "Example for TableViewModel";
@@ -451,7 +448,6 @@
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
-				264F3D438CBD24DCA204D225 /* CustomPrototypeCell.swift in Sources */,
 				264F36A99FA3D2F61C344154 /* FeedCell.swift in Sources */,
 				264F3DDF3D097E9537F4389C /* User.swift in Sources */,
 				3E4122B91C93113C00EB1856 /* RemovableSectionHeader.swift in Sources */,
