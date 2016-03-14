@@ -51,7 +51,7 @@ public class TableViewModel: NSObject, UITableViewDataSource, UITableViewDelegat
     }
 
     override public func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String:AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        guard let indexSet: NSIndexSet = change?[NSKeyValueChangeIndexesKey] as! NSIndexSet else {
+        guard let indexSet: NSIndexSet = change?[NSKeyValueChangeIndexesKey] as? NSIndexSet else {
             return
         }
 
@@ -91,8 +91,11 @@ public class TableViewModel: NSObject, UITableViewDataSource, UITableViewDelegat
     }
 
     public func removeAllSections() {
-        let allSections = self.sections as! [TableSection]
-        allSections.map(removeParentsFromSection)
+        let allSections: [TableSection] = self.sections.map {
+            section in
+            return section as! TableSection
+        }
+        allSections.forEach(removeParentsFromSection)
         let sectionsProxy = self.observableSections()
         let range = NSMakeRange(0, sectionsProxy.count)
         let indexes = NSIndexSet(indexesInRange: range)

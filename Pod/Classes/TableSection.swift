@@ -52,7 +52,7 @@ public class TableSection: NSObject {
     }
 
     override public func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String:AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        guard let indexSet: NSIndexSet = change?[NSKeyValueChangeIndexesKey] as! NSIndexSet else {
+        guard let indexSet: NSIndexSet = change?[NSKeyValueChangeIndexesKey] as? NSIndexSet else {
             return
         }
 
@@ -96,7 +96,7 @@ public class TableSection: NSObject {
     }
 
     public func addRows(rowsToAdd: Array<TableRowProtocol>) {
-        rowsToAdd.map(assignTableSectionOfRow)
+        rowsToAdd.forEach(assignTableSectionOfRow)
         let rowObjects = rowsToAdd.map {
             row in
             return row as AnyObject
@@ -118,9 +118,9 @@ public class TableSection: NSObject {
     }
 
     public func removeRows(rowsToRemove: Array<TableRowProtocol>) {
-        rowsToRemove.map(removeTableSectionOfRow)
+        rowsToRemove.forEach(removeTableSectionOfRow)
         let rowsProxy = self.observableRows()
-        var indexes = NSMutableIndexSet()
+        let indexes = NSMutableIndexSet()
         for row in rowsToRemove {
             let index = self.indexOfRow(row)
             indexes.addIndex(index)
@@ -133,7 +133,7 @@ public class TableSection: NSObject {
             row in
             return row as! TableRowProtocol
         }
-        allRows.map(removeTableSectionOfRow)
+        allRows.forEach(removeTableSectionOfRow)
         let rowsProxy = self.observableRows()
         let range = NSMakeRange(0, rowsProxy.count)
         let indexes = NSIndexSet(indexesInRange: range)
@@ -152,9 +152,8 @@ public class TableSection: NSObject {
         return rows.indexOfObject(row)
     }
 
-    private func assignTableSectionOfRow(row: TableRowProtocol) -> AnyObject {
+    private func assignTableSectionOfRow(row: TableRowProtocol) {
         row.tableSection = self
-        return row as! AnyObject
     }
 
     private func removeTableSectionOfRow(row: TableRowProtocol) {
