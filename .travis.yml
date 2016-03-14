@@ -13,5 +13,5 @@ xcode_scheme: TableViewModel-Example
 # - gem install cocoapods # Since Travis is not always on latest version
 # - pod install --project-directory=Example
 script:
-- set -o pipefail && xcodebuild test -workspace Example/TableViewModel.xcworkspace -scheme TableViewModel-Example -sdk iphonesimulator9.2 ONLY_ACTIVE_ARCH=NO | xcpretty
+- set -o pipefail && xcodebuild test -workspace Example/TableViewModel.xcworkspace -scheme TableViewModel-Example -sdk iphonesimulator9.2 -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.2' ONLY_ACTIVE_ARCH=NO | xcpretty
 - pod lib lint
