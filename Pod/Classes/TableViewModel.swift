@@ -30,7 +30,7 @@ public class TableViewModel: NSObject, UITableViewDataSource, UITableViewDelegat
     public let tableView: UITableView
     public var sectionAnimation: UITableViewRowAnimation
 
-    internal var sections: NSMutableArray
+    public private(set) var sections: NSMutableArray
 
     public init(tableView: UITableView) {
         self.sections = NSMutableArray()

@@ -27,7 +27,7 @@ import UIKit
 
 public class TableSection: NSObject {
 
-    internal var rows: NSMutableArray
+    public private(set) var rows: NSMutableArray
 
     public internal(set) var tableView: UITableView?
     public internal(set) weak var tableViewModel: TableViewModel?
