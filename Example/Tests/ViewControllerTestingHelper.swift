@@ -62,7 +62,7 @@ public class ViewControllerTestingHelper {
 
     class func pushViewController(viewController: UIViewController) -> UINavigationController {
         let navigationController: UINavigationController = UINavigationController(rootViewController: emptyViewController())
-        let window = prepareWindowWithRootViewController(navigationController)
+        _ = prepareWindowWithRootViewController(navigationController)
         navigationController.pushViewController(viewController, animated: false)
         wait()
         return navigationController

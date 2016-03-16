@@ -60,27 +60,27 @@ class TableRowSpec: QuickSpec {
                 }
             }
 
-            context("when the cell is already registered as a reusable cell") {
-                beforeEach {
-                    let nib: UINib = UINib(nibName: "SampleCell1", bundle: bundle)
-                    tableView.registerNib(nib, forCellReuseIdentifier: "SampleCell1")
-                }
-
-                context("when asked for the cell") {
-                    var cell: UITableViewCell!
-
-                    beforeEach {
-                        cell = tableRow.cellForTableView(tableView)
-                    }
-
-                    it("dequeues the reusable cell") {
-                        // TODO: test always fails because dequeueReusableCellWithIdentifier
-                        // returns a different instance every time
+            // TODO: test always fails because dequeueReusableCellWithIdentifier
+            // returns a different instance every time
+//            context("when the cell is already registered as a reusable cell") {
+//                beforeEach {
+//                    let nib: UINib = UINib(nibName: "SampleCell1", bundle: bundle)
+//                    tableView.registerNib(nib, forCellReuseIdentifier: "SampleCell1")
+//                }
+//
+//                context("when asked for the cell") {
+//                    var cell: UITableViewCell!
+//
+//                    beforeEach {
+//                        cell = tableRow.cellForTableView(tableView)
+//                    }
+//
+//                    it("dequeues the reusable cell") {
 //                        var dequeued = tableView.dequeueReusableCellWithIdentifier("SampleCell1")
 //                        expect(cell) === dequeued
-                    }
-                }
-            }
+//                    }
+//                }
+//            }
         }
     }
 }

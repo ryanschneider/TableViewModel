@@ -341,7 +341,7 @@ class AcceptanceSpec: QuickSpec {
                                 }
 
                                 it("does not deselect the cell") {
-                                    var selectedRowIndexPath = tableView.indexPathForSelectedRow
+                                    let selectedRowIndexPath = tableView.indexPathForSelectedRow
                                     expect(selectedRowIndexPath!.row) == 0
                                     expect(selectedRowIndexPath!.section) == 0
                                 }
@@ -392,7 +392,7 @@ class AcceptanceSpec: QuickSpec {
                             for var i = 1; i < 20; i++ {
                                 let indexPath = NSIndexPath(forRow: (i - 1), inSection: 0)
                                 tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Top, animated: false)
-                                var cell = tableView.cellForRowAtIndexPath(indexPath)
+                                let cell = tableView.cellForRowAtIndexPath(indexPath)
                                 expect(cell?.frame.height) == CGFloat(100 + i)
                             }
                         }
