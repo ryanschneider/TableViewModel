@@ -34,7 +34,7 @@ tableSection.addRow(tableRow)
 ```Swift
 tableRow.configureCell {
     cell in
-    let label = cell.viewWithTag(0) as! UILabel
+    let label = cell.viewWithTag(1) as! UILabel
     label.text = "Custom text"
 }
 ```
