@@ -87,7 +87,7 @@ tableSection.headerView = customHeaderView
 tableSection.headerHeight = customHeaderView.frame.size.height
 ```
 
-### Custom height height
+### Custom row height
 ```Swift
 tableRow.height = Float(90)
 ```
