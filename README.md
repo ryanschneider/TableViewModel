@@ -1,6 +1,8 @@
 # TableViewModel
 TableViewModel lets you create your UITableView instances declaratively in Swift. You can add, insert or remove sections and rows without worrying about implementing UITableViewDelegate and UITableViewDataSource methods.
 
+TableViewModel registers different types of cells as reusable cells in the TableView, and uses dequeueReusableCellWithIdentifier when it needs them. From a performance point of view it is not any different than manually implementing UITableViewDataSource.
+
 TableViewModel is inspired from [DXTableViewModel](https://github.com/libdx/DXTableViewModel) but it is not a Swift implementation of DXTableViewModel. It is written from the ground up in Swift and does many things differently.
 
 [![CI Status](http://img.shields.io/travis/tbergmen/TableViewModel.svg?style=flat)](https://travis-ci.org/tbergmen/TableViewModel)
