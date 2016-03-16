@@ -27,7 +27,7 @@ import UIKit
 
 public class TableSection: NSObject {
 
-    public private(set) var rows: NSMutableArray
+    internal private(set) var rows: NSMutableArray
 
     public internal(set) var tableView: UITableView?
     public internal(set) weak var tableViewModel: TableViewModel?
@@ -171,5 +171,9 @@ public class TableSection: NSObject {
 
     private func observableRows() -> NSMutableArray {
         return mutableArrayValueForKey("rows")
+    }
+
+    public func allRows() -> NSArray {
+        return rows
     }
 }
