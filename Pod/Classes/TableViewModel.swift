@@ -30,7 +30,7 @@ public class TableViewModel: NSObject, UITableViewDataSource, UITableViewDelegat
     public let tableView: UITableView
     public var sectionAnimation: UITableViewRowAnimation
 
-    public private(set) var sections: NSMutableArray
+    internal private(set) var sections: NSMutableArray
 
     public init(tableView: UITableView) {
         self.sections = NSMutableArray()
@@ -169,5 +169,9 @@ public class TableViewModel: NSObject, UITableViewDataSource, UITableViewDelegat
         let section = sections[indexPath.section] as! TableSection
         let row = section.rowAtIndex(indexPath.row)
         return row
+    }
+
+    public func allSections() -> NSArray {
+        return sections
     }
 }
