@@ -25,17 +25,43 @@ THE SOFTWARE.
 import Foundation
 import UIKit
 
+/**
+    The object that represents a section in a table view.
+*/
 public class TableSection: NSObject {
 
     internal private(set) var rows: NSMutableArray
 
+    /**
+        The table view that this section is bound to.
+    
+        - Warning: This property will be set internally when the section is added to a TableViewModel. Do not try to set this manually.
+    */
     public internal(set) var tableView: UITableView?
+    
+    /**
+     The table view model that this section belongs to.
+        
+     - Warning: This property will be set internally when the section is added to a TableViewModel. Do not try to set this manually.
+    */
     public internal(set) weak var tableViewModel: TableViewModel?
 
+    /// The row animation that will be displayed when rows are inserted or removed.
     public var rowAnimation: UITableViewRowAnimation
 
+    /// A UIView instance that will be displayed as the header view of the section.
     public var headerView: UIView?
+    
+    /// Height of the header view.
     public var headerHeight: Float = 0
+    
+    /**
+        Header title of the section.
+     
+        - Remark: When this property is set without setting the header height, it will set the header height to 30.
+
+        - Warning: If the headerView property is set, this title will not be shown.
+     */
     public var headerTitle: String? = nil {
         didSet {
             if headerHeight == 0 {
@@ -44,6 +70,9 @@ public class TableSection: NSObject {
         }
     }
 
+    /**
+        Initializes the TableSection.
+    */
     public init(rowAnimation: UITableViewRowAnimation = UITableViewRowAnimation.Fade) {
         rows = NSMutableArray()
         self.rowAnimation = rowAnimation
@@ -96,11 +125,25 @@ public class TableSection: NSObject {
         tableView.endUpdates()
     }
 
+    /**
+        Adds a row to the section.
+
+        - Parameters:
+            - row: The row to be added.
+    */
     public func addRow(row: TableRowProtocol) {
         assignTableSectionOfRow(row)
         observableRows().addObject(row)
     }
 
+    /**
+        Adds multiple rows to the section.
+     
+        - Parameters:
+            - rowsToAdd: Array of rows to be added.
+     
+        - Remark: Use this method instead of adding rows one by one in a loop. It performs remarkably better.
+    */
     public func addRows(rowsToAdd: Array<TableRowProtocol>) {
         rowsToAdd.forEach(assignTableSectionOfRow)
         let rowObjects = rowsToAdd.map {
@@ -113,16 +156,37 @@ public class TableSection: NSObject {
         rowsProxy.insertObjects(rowObjects, atIndexes: indexes)
     }
 
+    /**
+        Inserts a row at the given index.
+     
+        - Parameters:
+            - row: The row to be added.
+            - atIndex: Index at which the row will be added.
+     */
     public func insertRow(row: TableRowProtocol, atIndex index: Int) {
         assignTableSectionOfRow(row)
         observableRows().insertObject(row, atIndex: index)
     }
 
+    /**
+        Removes a row from the section.
+     
+        - Parameters:
+            - row: The row to be removed.
+    */
     public func removeRow(row: TableRowProtocol) {
         removeTableSectionOfRow(row)
         observableRows().removeObject(row)
     }
 
+    /**
+        Removes multiple rows.
+     
+        - Parameters:
+            - rowsToRemove: Array of rows that will be removed.
+
+        - Remark: Use this method instead of removing rows one by one in a loop. It performs remarkably better.
+    */
     public func removeRows(rowsToRemove: Array<TableRowProtocol>) {
         rowsToRemove.forEach(removeTableSectionOfRow)
         let rowsProxy = self.observableRows()
@@ -134,6 +198,11 @@ public class TableSection: NSObject {
         rowsProxy.removeObjectsAtIndexes(indexes)
     }
 
+    /**
+        Removes all rows from the section.
+
+        - Remark: Use this method instead of adding rows one by one in a loop. It performs remarkably better.
+    */
     public func removeAllRows() {
         let allRows = self.rows.map {
             row in
@@ -146,14 +215,17 @@ public class TableSection: NSObject {
         rowsProxy.removeObjectsAtIndexes(indexes)
     }
 
+    // Returns number of rows in the section.
     public func numberOfRows() -> Int {
         return rows.count
     }
 
+    /// Returns the row object at given index.
     public func rowAtIndex(index: Int) -> TableRowProtocol {
         return rows.objectAtIndex(index) as! TableRowProtocol
     }
 
+    /// Returns the index of row object.
     public func indexOfRow(row: TableRowProtocol) -> Int {
         return rows.indexOfObject(row)
     }
@@ -173,6 +245,11 @@ public class TableSection: NSObject {
         return mutableArrayValueForKey("rows")
     }
 
+    /**
+        Returns an immutable NSArray object contains all rows added to the section.
+     
+        - Warning: Do not try to modify this array, use add, insert and remove methods instead.
+    */
     public func allRows() -> NSArray {
         return rows
     }

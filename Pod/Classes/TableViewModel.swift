@@ -25,17 +25,27 @@ THE SOFTWARE.
 import Foundation
 import UIKit
 
-/// TableViewModel is an object oriented implementation of UITableViewDataSource and UITableViewDelegate protocols.
-///
-/// Use it in conjuction with TableSection and TableRow classes to create dynamic and configurable UITableView instances.
+/**
+    An object oriented implementation of UITableViewDataSource and UITableViewDelegate protocols.
+
+    Use it in conjuction with TableSection and TableRow classes to create dynamic and configurable UITableView instances.
+*/
 public class TableViewModel: NSObject, UITableViewDataSource, UITableViewDelegate {
 
+    /// The table view that this section is bound to.
     public let tableView: UITableView
+   
+    /// The row animation that will be displayed when sections are inserted or removed.
     public var sectionAnimation: UITableViewRowAnimation
 
-    /// Returns a readonly array of sections. Do not set this or add TableSection objects directly to this array. Use `addSection()`, `insertSection()` and `removeSection()` methods instead.
     internal private(set) var sections: NSMutableArray
 
+    /**
+        Initializes a TableViewModel with a table view.
+     
+        - Parameters:
+            - tableView: to use with the model
+    */
     public init(tableView: UITableView) {
         self.sections = NSMutableArray()
         self.tableView = tableView
@@ -75,16 +85,35 @@ public class TableViewModel: NSObject, UITableViewDataSource, UITableViewDelegat
         tableView.endUpdates()
     }
 
+    /**
+        Adds a section to tableView.
+     
+        - Parameters:
+            - section: The TableSection instance that describes the section.
+     */
     public func addSection(section: TableSection) {
         assignParentsToSection(section)
         observableSections().addObject(section)
     }
 
+    /**
+        Inserts a section to tableView at a given index.
+     
+        - Parameters:
+            - section: The TableSection instance that describes the section.
+            - atIndex: Index at which the section will be inserted.
+     */
     public func insertSection(section: TableSection, atIndex index: Int) {
         assignParentsToSection(section)
         observableSections().insertObject(section, atIndex: index)
     }
 
+    /**
+        Removes given section from the tableView
+        
+        - Parameters:
+            - section: The section to remove.
+    */
     public func removeSection(section: TableSection) {
         guard self.indexOfSection(section) != NSNotFound else {
             return
@@ -94,6 +123,7 @@ public class TableViewModel: NSObject, UITableViewDataSource, UITableViewDelegat
         observableSections().removeObject(section)
     }
 
+    /// Removes all sections from the tableView.
     public func removeAllSections() {
         let allSections: [TableSection] = self.sections.map {
             section in
@@ -116,6 +146,12 @@ public class TableViewModel: NSObject, UITableViewDataSource, UITableViewDelegat
         section.tableView = nil
     }
 
+    /**
+        Returns the index of given section.
+
+        - Parameters:
+            - section: The section to return the index of.
+    */
     public func indexOfSection(section: TableSection) -> Int {
         return sections.indexOfObject(section)
     }
@@ -175,6 +211,11 @@ public class TableViewModel: NSObject, UITableViewDataSource, UITableViewDelegat
         return row
     }
 
+    /**
+        Returns an immutable NSArray object contains all sections added to the model.
+     
+        - Warning: Do not try to modify this array, use add, insert and remove methods instead.
+    */
     public func allSections() -> NSArray {
         return sections
     }
