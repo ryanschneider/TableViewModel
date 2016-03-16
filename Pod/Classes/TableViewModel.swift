@@ -25,12 +25,17 @@ THE SOFTWARE.
 import Foundation
 import UIKit
 
+/// TableViewModel is an object oriented implementation of UITableViewDataSource and UITableViewDelegate protocols.
+///
+/// Use it in conjuction with TableSection and TableRow classes to create dynamic and configurable UITableView instances.
 public class TableViewModel: NSObject, UITableViewDataSource, UITableViewDelegate {
 
     public let tableView: UITableView
     public var sectionAnimation: UITableViewRowAnimation
 
     internal private(set) var sections: NSMutableArray
+    /// Returns a readonly array of sections. Do not set this or add TableSection objects directly to this array. Use `addSection()`, `insertSection()` and `removeSection()` methods instead.
+    public private(set) var sections: NSMutableArray
 
     public init(tableView: UITableView) {
         self.sections = NSMutableArray()
