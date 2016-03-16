@@ -33,9 +33,8 @@ public class TableViewModel: NSObject, UITableViewDataSource, UITableViewDelegat
     public let tableView: UITableView
     public var sectionAnimation: UITableViewRowAnimation
 
-    internal private(set) var sections: NSMutableArray
     /// Returns a readonly array of sections. Do not set this or add TableSection objects directly to this array. Use `addSection()`, `insertSection()` and `removeSection()` methods instead.
-    public private(set) var sections: NSMutableArray
+    internal private(set) var sections: NSMutableArray
 
     public init(tableView: UITableView) {
         self.sections = NSMutableArray()
