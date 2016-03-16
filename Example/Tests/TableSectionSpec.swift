@@ -38,6 +38,10 @@ class TableSectionSpec: QuickSpec {
                 section = TableSection()
             }
 
+            it("has a default header heigth 0") {
+                expect(section.headerHeight) == 0
+            }
+
             context("when a row is added to the section") {
                 var row: TableRow!
 
@@ -130,6 +134,32 @@ class TableSectionSpec: QuickSpec {
 
                 it("sets the tableSection property of the inserted row") {
                     expect(row1.tableSection) === section
+                }
+            }
+
+            context("when a header title is set") {
+                beforeEach {
+                    section.headerTitle = "Test title"
+                }
+
+                it("updates the header height to a default 30 pt") {
+                    expect(section.headerHeight) == 30
+                }
+            }
+
+            context("when header height is set manually") {
+                beforeEach {
+                    section.headerHeight = Float(48)
+                }
+
+                context("when a header title is set") {
+                    beforeEach {
+                        section.headerTitle = "Test title"
+                    }
+
+                    it("does not change the manually set header height") {
+                        expect(section.headerHeight) == 48
+                    }
                 }
             }
         }

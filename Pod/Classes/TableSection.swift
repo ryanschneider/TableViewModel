@@ -36,7 +36,13 @@ public class TableSection: NSObject {
 
     public var headerView: UIView?
     public var headerHeight: Float = 0
-    public var headerTitle: String? = nil
+    public var headerTitle: String? = nil {
+        didSet {
+            if headerHeight == 0 {
+                headerHeight = Float(30)
+            }
+        }
+    }
 
     public init(rowAnimation: UITableViewRowAnimation = UITableViewRowAnimation.Fade) {
         rows = NSMutableArray()
