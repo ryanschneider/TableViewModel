@@ -1,8 +1,8 @@
 {
   "name": "TableViewModel",
   "version": "0.1.2",
-  "summary": "A short description of TableViewModel.",
-  "description": "",
+  "summary": "Create dynamic UITableViews declaratively in Swift.",
+  "description": "Adding sections and rows to a UITableView dynamically is a pain. This pod is created to make this task easier.",
   "homepage": "https://github.com/tbergmen/TableViewModel",
   "license": "MIT",
   "authors": {
