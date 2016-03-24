@@ -12,6 +12,7 @@ podfile: Example/Podfile
 before_install:
 - gem install cocoapods --pre # Since Travis is not always on latest version
 - pod install --project-directory=Example
+- pod --version
 script:
 - set -o pipefail && xcodebuild test -workspace Example/TableViewModel.xcworkspace -scheme TableViewModel-Example -sdk iphonesimulator9.3 -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' ONLY_ACTIVE_ARCH=NO | xcpretty
 - pod lib lint
