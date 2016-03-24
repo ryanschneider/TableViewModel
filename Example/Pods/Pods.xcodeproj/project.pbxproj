@@ -94,6 +94,7 @@
 		D41F628A81153A978EB209E4FE925700 /* Nimble.h in Headers */ = {isa = PBXBuildFile; fileRef = BE582507271FE02BA93C412C422D4ED8 /* Nimble.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D74B3C8EC1BC29FE8A86ADCC3C430CA0 /* TableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F6A0689131418D448D62E58D349BB0 /* TableViewModel.swift */; };
 		D9DF50AC881AB19E90B8124833B47322 /* NSString+QCKSelectorName.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A83F0092F039C6F7AFC5D9D1E55E3BE /* NSString+QCKSelectorName.m */; };
+		DC27DCBF9EF8206758DB01C43DC8A29F /* TableViewModel.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8A567F3AE007F7EB2A0EBEEA8ADDBF43 /* TableViewModel.bundle */; };
 		DCA54337E8687685A293CC24A97F936C /* Contain.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65AB889028901EAF2823A40F21B4F5B /* Contain.swift */; };
 		DF0216DBDE0084F6C87FE9275A4E9F0D /* Nimble-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CFF847D8C75EDD1CE2BA21A60D08E00 /* Nimble-dummy.m */; };
 		E6F6FF9554A6C7EABD6B92B691751DAD /* BeLessThanOrEqual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CA5402AFA68BE2A5F70E09014318D /* BeLessThanOrEqual.swift */; };
@@ -792,6 +793,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC27DCBF9EF8206758DB01C43DC8A29F /* TableViewModel.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

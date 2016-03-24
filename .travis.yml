@@ -7,7 +7,6 @@ osx_image: xcode7.3
 xcode_sdk: iphonesimulator9.3
 xcode_workspace: Example/TableViewModel.xcworkspace
 xcode_scheme: TableViewModel-Example
-cache: cocoapods
 podfile: Example/Podfile
 before_install:
 - gem install cocoapods --pre # Since Travis is not always on latest version
