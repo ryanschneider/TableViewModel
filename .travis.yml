@@ -10,7 +10,7 @@ xcode_scheme: TableViewModel-Example
 podfile: Example/Podfile
 before_install:
 #- gem install cocoapods --pre # Since Travis is not always on latest version
-- gem install cocoapods -v '0.32.1'
+- gem install cocoapods -v '1.0.0.beta.6'
 - pod install --project-directory=Example
 - pod --version
 - bundle exec pod --version
