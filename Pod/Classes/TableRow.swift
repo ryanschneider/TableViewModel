@@ -49,6 +49,7 @@ public class TableRow: TableRowProtocol {
     private let cellIdentifier: String
     private var bundle: NSBundle?
     private var configureClosure: ((cell:UITableViewCell) -> ())?
+    private var configureHeightClosure: (() -> Float)?
     private var onSelectionClosure: ((row:TableRow) -> ())?
 
     /// The cell instance this row contains.
@@ -101,6 +102,10 @@ public class TableRow: TableRowProtocol {
 
     /// Returns the height of cell.
     public func heightForCell() -> CGFloat {
+        if let configureHeightClosure = self.configureHeightClosure {
+            return CGFloat(configureHeightClosure())
+        }
+        
         if let height = self.height {
             return CGFloat(height)
         }
@@ -121,6 +126,10 @@ public class TableRow: TableRowProtocol {
     public func configureCell(closure: (cell:UITableViewCell) -> ()) {
         configureClosure = closure
         callConfigureCellClosure()
+    }
+    
+    public func configureHeight(closure: () -> Float) {
+        configureHeightClosure = closure
     }
 
     /**

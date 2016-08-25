@@ -373,6 +373,22 @@ class AcceptanceSpec: QuickSpec {
                             expect(cell?.frame.height) == 120
                         }
                     }
+                    
+                    context("when configure height closure is set") {
+                        beforeEach {
+                            let row = TableRow(cellIdentifier: "SampleCell2", inBundle: bundle)
+                            row.height = 120
+                            row.configureHeight {
+                                return 90
+                            }
+                            section.addRow(row)
+                        }
+                        
+                        it("ignores the cell height in the nib and height property") {
+                            let cell = firstCell()
+                            expect(cell?.frame.height) == 90
+                        }
+                    }
 
                     context("when a cell with variable height is used") {
                         var rows: Array<TableRow>!
@@ -397,7 +413,7 @@ class AcceptanceSpec: QuickSpec {
                             }
                         }
                     }
-
+                    
                     context("when multiple rows are added to the section") {
                         var row1: TableRow!
                         var row2: TableRow!
