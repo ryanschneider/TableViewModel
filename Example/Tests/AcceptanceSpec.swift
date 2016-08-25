@@ -380,7 +380,7 @@ class AcceptanceSpec: QuickSpec {
                         beforeEach {
                             rows = Array<TableRow>()
 
-                            for var i = 1; i < 20; i++ {
+                            for i in 1 ..< 20 {
                                 let row = TableRow(cellIdentifier: "SampleCell1", inBundle: bundle)
                                 row.height = Float(100 + i)
                                 rows.append(row)
@@ -389,7 +389,7 @@ class AcceptanceSpec: QuickSpec {
                         }
 
                         it("renders each row in correct height") {
-                            for var i = 1; i < 20; i++ {
+                            for i in 1 ..< 20 {
                                 let indexPath = NSIndexPath(forRow: (i - 1), inSection: 0)
                                 tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Top, animated: false)
                                 let cell = tableView.cellForRowAtIndexPath(indexPath)

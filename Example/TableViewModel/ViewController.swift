@@ -39,9 +39,9 @@ class ViewController: UIViewController {
 
         addFeedSection()
         addRemovableSection()
-        self.performSelector("insertGiveFeedbackRow", withObject: nil, afterDelay: 3)
-        self.performSelector("insertRemovableRow", withObject: nil, afterDelay: 5)
-        self.performSelector("insertFeedRow", withObject: nil, afterDelay: 7)
+        self.performSelector(#selector(ViewController.insertGiveFeedbackRow), withObject: nil, afterDelay: 3)
+        self.performSelector(#selector(ViewController.insertRemovableRow), withObject: nil, afterDelay: 5)
+        self.performSelector(#selector(ViewController.insertFeedRow), withObject: nil, afterDelay: 7)
     }
 
     func addFeedSection() {
