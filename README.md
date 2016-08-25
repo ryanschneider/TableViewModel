@@ -94,6 +94,13 @@ tableSection.headerHeight = customHeaderView.frame.size.height
 tableRow.height = Float(90)
 ```
 
+### Custom row height with closure
+```Swift
+tableRow.configureHeight {
+    return 100
+}
+```
+
 ### Row animation for adding, inserting and removing rows
 ```Swift
 tableSection.rowAnimation = UITableRowAnimation.Right

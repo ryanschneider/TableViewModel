@@ -128,6 +128,9 @@ public class TableRow: TableRowProtocol {
         callConfigureCellClosure()
     }
     
+    /**
+        Adds a closure which is called when a cell will be displayed. Use this closure to adjust the height for cell.
+    */
     public func configureHeight(closure: () -> Float) {
         configureHeightClosure = closure
     }
