@@ -18,8 +18,5 @@
   "requires_arc": true,
   "source_files": "Pod/Classes/**/*",
   "resource_bundles": {
-    "TableViewModel": [
-      "Pod/Assets/*.png"
-    ]
   }
 }
