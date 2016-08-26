@@ -1,11 +1,14 @@
 source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
-target 'TableViewModel_Example', :exclusive => true do
+platform :ios, '8.3'
+inhibit_all_warnings!
+
+target 'TableViewModel_Example' do
   pod "TableViewModel", :path => "../"
 end
 
-target 'TableViewModel_Tests', :exclusive => true do
+target 'TableViewModel_Tests' do
   pod "TableViewModel", :path => "../"
 
   pod 'Quick'
