@@ -174,7 +174,15 @@ public class TableViewModel: NSObject, UITableViewDataSource, UITableViewDelegat
     public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return rowForIndexPath(indexPath).heightForCell()
     }
-
+    
+    public func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        let row = rowForIndexPath(indexPath)
+        if !row.allowsSelection {
+            return nil
+        }
+        return indexPath
+    }
+    
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let row = rowForIndexPath(indexPath)
 

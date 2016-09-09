@@ -67,6 +67,9 @@ public class TableRow: TableRowProtocol {
     
     /// Height of the row.
     public var height: Float?
+    
+    /// If set to false, the cell cannot be selected. Default value of this property is `true`.
+    public var allowsSelection: Bool = true
 
     /// If set to true, deselects the row when it is selected. Default value of this property is `true`.
     public var shouldDeselectAfterSelection: Bool = true
