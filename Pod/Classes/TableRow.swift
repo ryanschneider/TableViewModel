@@ -37,6 +37,9 @@ public protocol TableRowProtocol: class, AnyObject {
     /// Called when the row is selected.
     func select()
 
+    /// If set to false, the cell cannot be selected.
+    var allowsSelection: Bool { get }
+
     /// If set to true, deselects the row when it is selected.
     var shouldDeselectAfterSelection: Bool { get }
 
