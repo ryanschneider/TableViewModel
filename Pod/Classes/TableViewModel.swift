@@ -205,6 +205,10 @@ open class TableViewModel: NSObject, UITableViewDataSource, UITableViewDelegate 
         return self.sectionAtIndex(sectionIndex).headerTitle
     }
 
+    open func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        self.sectionAtIndex(section).callConfigureHeaderFooterViewClosure(view: view)
+    }
+
     fileprivate func observableSections() -> NSMutableArray {
         return mutableArrayValue(forKey: "sections")
     }

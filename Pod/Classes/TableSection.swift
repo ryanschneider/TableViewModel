@@ -31,6 +31,7 @@ import UIKit
 open class TableSection: NSObject {
 
     internal fileprivate(set) var rows: NSMutableArray
+    fileprivate var configureClosure: ((_ headerFooter:UITableViewHeaderFooterView) -> ())?
 
     /**
         The table view that this section is bound to.
@@ -68,6 +69,25 @@ open class TableSection: NSObject {
                 headerHeight = Float(30)
             }
         }
+    }
+
+    /**
+     Adds a closure which is called when a header or footer view will be displayed. Use this closure to customize the view before display.
+     */
+    open func configureHeaderFooterView(_ closure: @escaping (_ headerFooterView:UITableViewHeaderFooterView) -> ()) {
+        configureClosure = closure
+    }
+
+    internal func callConfigureHeaderFooterViewClosure(view: UIView?) {
+        guard let closure = self.configureClosure else {
+            return
+        }
+
+        guard let headerFooterView = view as? UITableViewHeaderFooterView else {
+            return
+        }
+
+        closure(headerFooterView)
     }
 
     /**
